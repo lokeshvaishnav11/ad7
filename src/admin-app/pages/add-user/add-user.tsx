@@ -566,7 +566,7 @@ const AddUser = () => {
                   <PersonAddIcon /> Create
                 </p>
               </div>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={onSubmit} noValidate>
                 <div className="row">
                   <div className="col-md-6 personal-detail">
                     {/* <h4 className="m-b-20 col-md-12">Personal Detail</h4> */}
