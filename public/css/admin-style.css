@@ -2704,13 +2704,18 @@ tr.suspended-fancy {
 }
 
 .ball-runs.playera {
-  background: #355e3b;
-  color: #ff4500;
+  background: #ffc107;
+  color: #ffffff;
 }
 
 .ball-runs.playerb {
-  background: #355e3b;
-  color: #ffff33;
+  background: #007bff;
+  color: #ffffff;
+}
+
+.ball-runs.playerc {
+  background: #dc3545;
+  color: white;
 }
 
 .blinking span {
