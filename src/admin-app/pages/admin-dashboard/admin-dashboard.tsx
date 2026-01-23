@@ -441,8 +441,8 @@ const AdminDashboard = () => {
           <div className="container mt30">
             <div className="row">
               <div className="col-6 mb-2 col-md-3 text-center">
-                <a
-                  href={`admin/list-clients/${userState?.user?.username}/user`}
+                <CustomLink
+                 to={`/list-clients/${userState?.user?.username}/${getRoleOptions()[0].key}`} 
                 >
                   <div className="wap w-100 text-center">
                     <span className="icon-circle">
@@ -452,8 +452,9 @@ const AdminDashboard = () => {
                       />
                     </span>
                     <p className="small mt-2">Agent Details </p>
+                    
                   </div>
-                </a>
+                </CustomLink>
               </div>
 
               <div className="col-6 mb-2 col-md-3 text-center">

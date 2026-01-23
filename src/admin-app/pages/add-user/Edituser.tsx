@@ -617,6 +617,11 @@ const validationSchema = Yup.object().shape({
     .typeError("S.Comm. must be a number")
     .min(0, "S.Comm. cannot be less than 0")
     .max(4, "S.Comm. cannot be more than 4"),
+
+    matcom: Yup.number()
+    .typeError("Mat.Comm. must be a number")
+    .min(0, "Mat.Comm. cannot be less than 0")
+    .max(4, "Mat.Comm. cannot be more than 10"),
 });
 
 
@@ -674,6 +679,8 @@ const EditUser = (data: any) => {
       setValue("share", selectedUserChild.share);
       setValue("mcom", selectedUserChild.mcom);
       setValue("scom", selectedUserChild.scom);
+      setValue("matcom", selectedUserChild.matcom);
+
 
       const partnership: any = selectedUserChild.partnership || {};
       Object.keys(partnership).forEach((sportId) => {
@@ -686,6 +693,26 @@ const EditUser = (data: any) => {
 
   // Submit Handler
   const onSubmit = handleSubmit((formData: any) => {
+
+    // 🔴 COMMISSION LIMIT VALIDATION (BEFORE SUBMIT)
+  if (Number(formData.mcom) > 2 || Number(formData.mcom) < 0) {
+    toast.error("Match Commission must be between 0 and 2%");
+    return;
+  }
+
+  if (Number(formData.scom) > 4 || Number(formData.scom) < 0) {
+    toast.error("Session Commission must be between 0 and 4%");
+    return;
+  }
+
+  if (Number(formData.matcom) > 10 || Number(formData.matcom) < 0) {
+    toast.error("Matka Commission must be between 0 and 10%");
+    return;
+  }
+
+
+
+
     const payload: any = {
       _id: selectedUserChild?._id,
       username: selectedUserChild?.username,
@@ -693,6 +720,8 @@ const EditUser = (data: any) => {
       share: Number(formData.share),
       mcom: Number(formData.mcom),
       scom: Number(formData.scom),
+      matcom: Number(formData.matcom),
+
       partnership: {},
     };
 
@@ -815,6 +844,22 @@ const EditUser = (data: any) => {
                       type="number"
                       min="0"
                       max="4"
+                      step="0.01"
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label htmlFor="matcom">Matka Commission:</label>
+                    <p>Current: ≤{childData.matcom}%</p>
+                    <input
+                      className="form-control"
+                      {...register("matcom")}
+                      id="matcom"
+                      type="number"
+                      min="0"
+                      max="10"
                       step="0.01"
                     />
                   </div>

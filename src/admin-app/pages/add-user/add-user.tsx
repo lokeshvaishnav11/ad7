@@ -330,6 +330,21 @@ const AddUser = () => {
       return; // Prevent further execution
     }
 
+    if (Number(data.matcom) > 10 || Number(data.matcom) < 0) {
+      toast.error("Matka commission must be between 0 and 10");
+      return;
+    }
+
+    if (Number(data.mcom) > 2 || Number(data.mcom) < 0) {
+      toast.error("Match commission must be between 0 and 2");
+      return;
+    }
+
+    if (Number(data.scom) > 4 || Number(data.scom) < 0) {
+      toast.error("Session commission must be between 0 and 4");
+      return;
+    }
+
     setLoading(true);
 
     data.creditRefrences = data.sendamount;
@@ -403,6 +418,8 @@ const AddUser = () => {
     // delete data.delay;
     // delete data.partnershipOur;
 
+    console.log(data, "send dataa");
+
     UserService.addUser(data)
       .then((ress) => {
         if (ress?.data?.message === "New User Added and Funded Successfully") {
@@ -424,7 +441,6 @@ const AddUser = () => {
         toast.error(error);
       });
 
-    //console.log(data, "send dataa");
   });
 
   const roleOption = () => {
@@ -898,6 +914,7 @@ const AddUser = () => {
                             step="0.01"
                             type="number"
                           />
+                        
                         </div>
                       </div>
 
@@ -1116,7 +1133,7 @@ const AddUser = () => {
                 )}
 
                 <div
-                  // style={{ display: "none" }}
+                  style={{ display: "none" }}
                   className="row m-t-20 "
                   id="min-max-bet-div"
                 >
@@ -1124,7 +1141,7 @@ const AddUser = () => {
                     {/* <h4 className="m-b-20 col-md-12"></h4> */}
                     <table className="table table-striped table-borderedddd">
                       <thead
-                        className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
+                        // className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
                       >
                         <tr>
                           <th />
@@ -1149,9 +1166,9 @@ const AddUser = () => {
                       </thead>
                       <tbody>
                         <tr
-                          className={` ${
-                            thetype === "sadmin" ? "d-none" : "d-none"
-                          }`}
+                          // className={` ${
+                          //   thetype === "sadmin" ? "d-none" : "d-none"
+                          // }`}
                         >
                           <td></td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
@@ -1165,9 +1182,9 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${
-                            thetype === "sadmin" ? "d-none" : "d-none"
-                          }`}
+                          // className={` ${
+                          //   thetype === "sadmin" ? "d-none" : "d-none"
+                          // }`}
                         >
                           <td>Provide Min Bet</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
@@ -1194,9 +1211,9 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${
-                            thetype === "sadmin" ? "d-none" : "d-none"
-                          }`}
+                          // className={` ${
+                          //   thetype === "sadmin" ? "d-none" : "d-none"
+                          // }`}
                         >
                           <td>Max Bet</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
@@ -1210,10 +1227,14 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${
-                            thetype === "sadmin" ? "d-none" : "d-none"
-                          }`}
+                          // className={` ${
+                          //   thetype === "sadmin" ? "d-none" : "d-none"
+                          // }`}
                         >
+                          {/* c - 10000
+                          fa - 50000
+                          m - 200000  */}
+
                           <td>Provide Min Bet</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
                             sportId == 1 || sportId == 2 || sportId == 4 ? (
@@ -1225,7 +1246,7 @@ const AddUser = () => {
                                   placeholder={""}
                                   max={userData?.userSetting?.[sportId].maxBet}
                                   defaultValue={
-                                    userData?.userSetting?.[sportId].maxBet
+                                    sportId == 1 ? 200000	 : sportId == 2 ? 50000 : 10000
                                   }
                                   disabled={isPartnership}
                                   min={0}
@@ -1239,9 +1260,9 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${
-                            thetype === "sadmin" ? "d-none" : "d-none"
-                          }`}
+                          // className={` ${
+                          //   thetype === "sadmin" ? "d-none" : "d-none"
+                          // }`}
                         >
                           <td>Delay</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
@@ -1255,7 +1276,7 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
+                          // className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
                         >
                           <td>Provide Delay</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
