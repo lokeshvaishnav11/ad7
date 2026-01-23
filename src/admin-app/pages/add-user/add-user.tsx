@@ -1124,7 +1124,7 @@ const AddUser = () => {
                     {/* <h4 className="m-b-20 col-md-12"></h4> */}
                     <table className="table table-striped table-borderedddd">
                       <thead
-                        className={` ${thetype === "sadmin" ? "d-" : "d-none"}`}
+                        className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
                       >
                         <tr>
                           <th />
@@ -1150,7 +1150,7 @@ const AddUser = () => {
                       <tbody>
                         <tr
                           className={` ${
-                            thetype === "sadmin" ? "d-" : "d-none"
+                            thetype === "sadmin" ? "d-none" : "d-none"
                           }`}
                         >
                           <td></td>
@@ -1166,7 +1166,7 @@ const AddUser = () => {
                         </tr>
                         <tr
                           className={` ${
-                            thetype === "sadmin" ? "d" : "d-none"
+                            thetype === "sadmin" ? "d-none" : "d-none"
                           }`}
                         >
                           <td>Provide Min Bet</td>
@@ -1195,7 +1195,7 @@ const AddUser = () => {
                         </tr>
                         <tr
                           className={` ${
-                            thetype === "sadmin" ? "d-" : "d-none"
+                            thetype === "sadmin" ? "d-none" : "d-none"
                           }`}
                         >
                           <td>Max Bet</td>
@@ -1211,7 +1211,7 @@ const AddUser = () => {
                         </tr>
                         <tr
                           className={` ${
-                            thetype === "sadmin" ? "d-" : "d-none"
+                            thetype === "sadmin" ? "d-none" : "d-none"
                           }`}
                         >
                           <td>Provide Min Bet</td>
@@ -1240,7 +1240,7 @@ const AddUser = () => {
                         </tr>
                         <tr
                           className={` ${
-                            thetype === "sadmin" ? "d" : "d-none"
+                            thetype === "sadmin" ? "d-none" : "d-none"
                           }`}
                         >
                           <td>Delay</td>
@@ -1255,7 +1255,7 @@ const AddUser = () => {
                           )}
                         </tr>
                         <tr
-                          className={` ${thetype === "sadmin" ? "" : "d-none"}`}
+                          className={` ${thetype === "sadmin" ? "d-none" : "d-none"}`}
                         >
                           <td>Provide Delay</td>
                           {sportListState.sports?.map(({ _id, sportId }) =>
