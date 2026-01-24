@@ -442,7 +442,7 @@ const AdminDashboard = () => {
             <div className="row">
               <div className="col-6 mb-2 col-md-3 text-center">
                 <CustomLink
-                 to={`/list-clients/${userState?.user?.username}/${getRoleOptions()[0].key}`} 
+                 to={`/list-clients/${userState?.user?.username}/${getRoleOptions()[0]?.key}`} 
                 >
                   <div className="wap w-100 text-center">
                     <span className="icon-circle">

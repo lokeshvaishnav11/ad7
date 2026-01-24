@@ -611,17 +611,17 @@ const validationSchema = Yup.object().shape({
   mcom: Yup.number()
     .typeError("M.Comm. must be a number")
     .min(0, "M.Comm. cannot be less than 0")
-    .max(2, "M.Comm. cannot be more than 2"),
+   ,
 
   scom: Yup.number()
     .typeError("S.Comm. must be a number")
     .min(0, "S.Comm. cannot be less than 0")
-    .max(4, "S.Comm. cannot be more than 4"),
+  ,
 
     matcom: Yup.number()
     .typeError("Mat.Comm. must be a number")
     .min(0, "Mat.Comm. cannot be less than 0")
-    .max(4, "Mat.Comm. cannot be more than 10"),
+,
 });
 
 
@@ -630,6 +630,8 @@ const EditUser = (data: any) => {
   const userState = useAppSelector<{ user: User }>(selectUserData);
   const [selectedUser, setSelectedUser] = React.useState<User>();
   const [selectedUserChild, setSelectedUserChild] = React.useState<User>();
+  const [loading, setLoading] = React.useState(false);
+
 
   const [isPartnership, setIsPartnership] = React.useState(false);
   const [isExposerAllow, setExposerAllow] = React.useState(false);
@@ -694,21 +696,7 @@ const EditUser = (data: any) => {
   // Submit Handler
   const onSubmit = handleSubmit((formData: any) => {
 
-    // 🔴 COMMISSION LIMIT VALIDATION (BEFORE SUBMIT)
-  if (Number(formData.mcom) > 2 || Number(formData.mcom) < 0) {
-    toast.error("Match Commission must be between 0 and 2%");
-    return;
-  }
-
-  if (Number(formData.scom) > 4 || Number(formData.scom) < 0) {
-    toast.error("Session Commission must be between 0 and 4%");
-    return;
-  }
-
-  if (Number(formData.matcom) > 10 || Number(formData.matcom) < 0) {
-    toast.error("Matka Commission must be between 0 and 10%");
-    return;
-  }
+    setLoading(true);
 
 
 
@@ -740,11 +728,13 @@ const EditUser = (data: any) => {
     UserService.editUcom(payload)
       .then(() => {
         toast.success("User successfully updated");
+        setLoading(false);
       })
       .catch((e) => {
         const error = e.response?.data?.message || "Something went wrong";
         toast.error(error);
-      });
+        setLoading(false);
+      })
   });
 
   const userData = selectedUser ? selectedUser : userState?.user;
@@ -819,14 +809,14 @@ const EditUser = (data: any) => {
                 <div className="col-md-6">
                   <div className="form-group">
                     <label htmlFor="mcom">Match Commission:</label>
-                    <p>Current: ≤{childData.mcom}%</p>
+                    <p>Current: {childData.mcom}%</p>
                     <input
                       className="form-control"
                       {...register("mcom")}
                       id="mcom"
                       type="number"
                       min="0"
-                      max="2"
+            
                       step="0.01"
                     />
                   </div>
@@ -836,14 +826,14 @@ const EditUser = (data: any) => {
                 <div className="col-md-6">
                   <div className="form-group">
                     <label htmlFor="scom">Session Commission:</label>
-                    <p>Current: ≤{childData.scom}%</p>
+                    <p>Current:{childData.scom}%</p>
                     <input
                       className="form-control"
                       {...register("scom")}
                       id="scom"
                       type="number"
                       min="0"
-                      max="4"
+                
                       step="0.01"
                     />
                   </div>
@@ -852,14 +842,14 @@ const EditUser = (data: any) => {
                 <div className="col-md-6">
                   <div className="form-group">
                     <label htmlFor="matcom">Matka Commission:</label>
-                    <p>Current: ≤{childData.matcom}%</p>
+                    <p>Current:{childData.matcom}%</p>
                     <input
                       className="form-control"
                       {...register("matcom")}
                       id="matcom"
                       type="number"
                       min="0"
-                      max="10"
+                    
                       step="0.01"
                     />
                   </div>
@@ -870,8 +860,8 @@ const EditUser = (data: any) => {
               <div className="row m-t-20">
                 <div className="col-md-12">
                   <div className="float-right">
-                    <SubmitButton className="btn btn-submit" type="submit">
-                      Edit User
+                    <SubmitButton  disabled={loading} className="btn btn-submit" type="submit">
+                    {loading ? "Updating..." : "Edit User"}
                     </SubmitButton>
                   </div>
                 </div>
