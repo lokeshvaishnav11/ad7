@@ -742,7 +742,8 @@ const ClientBetsUser = () => {
                                 color: "white",
                               }}
                             >
-                              {totalPL * (shared * 0.01) }
+                             {(totalPL * (shared * 0.01)).toFixed()}
+
                             </span>
                             <span className="badge badge-light float-right ng-binding ng-scope">
                               {/* {bet?.declared === 1 && ( */}
@@ -881,7 +882,8 @@ const ClientBetsUser = () => {
                                                   : "text-green-500"
                                               }`}
                                             >
-                                              {bet?.profitLoss * (shared * 0.01) }
+                                              {(bet?.profitLoss * (shared * 0.01)).toFixed()}
+
                                             </td>
                                           )}
 
@@ -969,7 +971,8 @@ const ClientBetsUser = () => {
                                         {itemKey}
                                       </span>
                                       <span className={`badge-value ms-1 `}>
-                                        {-value * (shared * 0.01)}
+                                      {(-value * (shared * 0.01)).toFixed()}
+
                                       </span>
                                     </div>
                                   );
