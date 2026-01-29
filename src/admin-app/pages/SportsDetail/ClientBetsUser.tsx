@@ -882,7 +882,7 @@ const ClientBetsUser = () => {
                                                   : "text-green-500"
                                               }`}
                                             >
-                                              {(bet?.profitLoss * (shared * 0.01)).toFixed()}
+                                              {(bet?.profitLoss).toFixed()}
 
                                             </td>
                                           )}
