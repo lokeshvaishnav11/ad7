@@ -742,7 +742,7 @@ const ClientBetsUser = () => {
                                 color: "white",
                               }}
                             >
-                             {(totalPL * (shared * 0.01)).toFixed()}
+                             {/* {(totalPL * (shared * 0.01)).toFixed()} */}
 
                             </span>
                             <span className="badge badge-light float-right ng-binding ng-scope">
@@ -971,7 +971,7 @@ const ClientBetsUser = () => {
                                         {itemKey}
                                       </span>
                                       <span className={`badge-value ms-1 `}>
-                                      {(-value * (shared * 0.01)).toFixed()}
+                                      {(-value).toFixed()}
 
                                       </span>
                                     </div>

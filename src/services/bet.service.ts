@@ -80,8 +80,11 @@ class BetService {
 
 
   getBets(matchId: number) {
-    return fancyApi.get(`bets?matchId=${matchId}`);
+    return api.get(`bets?matchId=${matchId}`);
   }
+  //  getBets2(matchId: number) {
+  //   return fancyApi.get(`bets?matchId=${matchId}`);
+  // }
  
   getMarketAnalysis() {
     return api.get(`get-market-analysis`);

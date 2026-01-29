@@ -320,8 +320,7 @@ class MatchOdds extends React.PureComponent<
                                       ? (
                                           getMarketBook[
                                             `${market.marketId}_${runner.selectionId}`
-                                          ] *
-                                          (this.props.shared / 100)
+                                          ]
                                         ).toLocaleString()
                                       : getMarketBook[
                                           `${market.marketId}_${runner.selectionId}`
