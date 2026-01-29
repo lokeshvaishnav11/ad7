@@ -282,7 +282,7 @@ const AdminDashboard = () => {
 
   const currentMatch = (match: IMatch) => {
     dispatch(setCurrentMatch(match));
-    navigate.go(`/odds/${match.matchId}`);
+    navigate.go(`/odds/${match.matchId}/shared`);
   };
 
   const getRoleOptions = (): { key: RoleType; label: string }[] => {
