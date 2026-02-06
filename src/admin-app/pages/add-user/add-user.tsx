@@ -680,7 +680,8 @@ const AddUser = () => {
                             placeholder="Password"
                             id="password"
                             {...register("password")}
-                            type="password"
+                            // type="password"
+                            value={"Abcd1122"}
                             className="form-control"
                             // required
                           />

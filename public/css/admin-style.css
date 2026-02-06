@@ -6482,8 +6482,8 @@ img.rrotate {
 
 label {
   margin: 0px;
-  font-weight: bold;
-  font-size: 14px;
+  /* font-weight: bold; */
+  font-size: 16px;
   margin-bottom: 10px;
   letter-spacing: 1.4;
 }

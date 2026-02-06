@@ -1559,7 +1559,7 @@ const ListClients = () => {
                               urole === "mdl" ||
                               urole === "smdl" ||
                               urole === "suadmin"
-                                ? "******"
+                                ? user?.password
                                 : user?.password}
                             </td>
 
