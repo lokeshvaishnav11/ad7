@@ -153,7 +153,9 @@ const EngageModal: React.FC<EngageModalProps> = ({
                             ? moment
                                 .utc(r.betClickTime)
                                 .format("MMMM Do YYYY, h:mm:ss A")
-                            : moment.utc(r.createdAt).format("MMMM Do YYYY,h:mm:ss A")}
+                            :  moment(r.createdAt)
+        .tz("Asia/Kolkata")
+        .format("DD/MM/YYYY hh:mm:ss A")}
                         </td>
                       </tr>
                     ))

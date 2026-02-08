@@ -49,6 +49,10 @@ class AccountService {
     return api.get('marketmatka')
   }
 
+   bookmarketmatkaa(id:any) {
+    return api.get(`bookmarketmatka?gid=${id}`)
+  }
+
   getAccountList22() {
     return api.post(`account-statement-list-22`)
   }

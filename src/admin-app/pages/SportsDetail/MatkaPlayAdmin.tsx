@@ -24,7 +24,18 @@ const MatkaPlayAdmin = () => {
 
 
   const [matkaList, setMatkaList] = React.useState<any>([]);
-  console.log(matkaList,"makdk")
+  console.log(matkaList, "makdk")
+
+  const [book, setBook] = React.useState<{
+    single: Record<string, number>;
+    andar: Record<string, number>;
+    bahar: Record<string, number>;
+  }>({
+    single: {},
+    andar: {},
+    bahar: {},
+  });
+
 
 
   React.useEffect(() => {
@@ -39,7 +50,7 @@ const MatkaPlayAdmin = () => {
     };
 
     fetchMatkaList();
-  }, [matchId,userState]);
+  }, [matchId, userState]);
 
   const match = matkaList?.find((item: any) => item?.roundid == matchId);
 
@@ -66,15 +77,56 @@ const MatkaPlayAdmin = () => {
       }
     };
 
+
+
     fetchMatkaBets();
-  }, [matchId,userState]);
+  }, [matchId, userState]);
+
+
+  React.useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        if (!matchId) return;
+
+        const res = await accountService.bookmarketmatkaa(matchId);
+
+        const bookData = res?.data?.data?.book;
+
+        if (bookData) {
+          setBook({
+            single: bookData.single || {},
+            andar: bookData.andar || {},
+            bahar: bookData.bahar || {},
+          });
+        }
+      } catch (error) {
+        console.error("Book matka error:", error);
+      }
+    };
+
+    fetchBook();
+  }, [matchId, userState]);
+
 
   // ✅ matching item nikaalo
 
 
-//   if (!match) {
-//     return <div className="text-center mt-3">Match not found</div>;
-//   }
+  //   if (!match) {
+  //     return <div className="text-center mt-3">Match not found</div>;
+  //   }
+
+  const renderPL = (value: number | undefined) => {
+    if (!value || value === 0) {
+      return <span className="text-dark">0</span>;
+    }
+
+    return (
+      <span style={{ color: value < 0 ? "red" : "green", fontWeight: "bold" }}>
+        {value}
+      </span>
+    );
+  };
+
 
   const singlePattiNumbers = [
     ...Array.from({ length: 99 }, (_, i) => String(i + 1).padStart(2, "0")),
@@ -132,23 +184,23 @@ const MatkaPlayAdmin = () => {
   //console.log(matkastake, "makrkk");
 
   const openTime = match?.opentime
-  ? moment()
+    ? moment()
       .tz("Asia/Kolkata")
       .hour(match.opentime.hour)
       .minute(match.opentime.minute)
       .second(0)
       .format("DD-MM-YYYY hh:mm A")
-  : "--";
+    : "--";
 
-const closeTime = match?.closetime
-  ? moment()
+  const closeTime = match?.closetime
+    ? moment()
       .tz("Asia/Kolkata")
       .add(match.gamename === "Disawar" ? 1 : 0, "day")
       .hour(match.closetime.hour)
       .minute(match.closetime.minute)
       .second(0)
       .format("DD-MM-YYYY hh:mm A")
-  : "--";
+    : "--";
 
 
   return (
@@ -169,13 +221,13 @@ const closeTime = match?.closetime
           >
             {moment().hour(9).minute(0).second(0).format("DD-MM-YYYY hh:mm A")}
           </p> */}
-           <p className="mb-1 pt-1">
-        <b>Open:</b> {openTime}
-      </p>
+          <p className="mb-1 pt-1">
+            <b>Open:</b> {openTime}
+          </p>
 
-      <p className="mb-1">
-        <b>Close:</b> {closeTime}
-      </p>
+          <p className="mb-1">
+            <b>Close:</b> {closeTime}
+          </p>
         </a>
       </div>
 
@@ -216,7 +268,10 @@ const closeTime = match?.closetime
               {singlePattiNumbers.map((num) => (
                 <div key={num} className="col-4 col-md-3 mb-2">
                   <button className="btn btn-info w-100">{num}</button>
-                  <span className="btn w-100">0</span>
+                  {/* <span className="btn w-100">0</span> */}
+                  <span className="btn w-100">
+                    {renderPL(book.single[num])}
+                  </span>
                 </div>
               ))}
             </div>
@@ -231,7 +286,9 @@ const closeTime = match?.closetime
               {harafNumbers.map((num) => (
                 <div key={`andar-${num}`} className="col-4 col-md-1 mb-2">
                   <button className="btn btn-info w-100">{num}</button>
-                  <span className="btn w-100">0</span>
+                  <span className="btn w-100">
+                    {renderPL(book.andar[num])}
+                  </span>
                 </div>
               ))}
             </div>
@@ -242,7 +299,9 @@ const closeTime = match?.closetime
               {harafNumbers.map((num) => (
                 <div key={`bahar-${num}`} className="col-4 col-md-1 mb-2">
                   <button className="btn btn-info w-100">{num}</button>
-                  <span className="btn w-100">0</span>
+                  <span className="btn w-100">
+                    {renderPL(book.bahar[num])}
+                  </span>
                 </div>
               ))}
             </div>
@@ -297,7 +356,7 @@ const closeTime = match?.closetime
                   <td className="text-center text-nowrap">{index + 1}</td>
 
                   {userState.user.role !== RoleType.user && (
-                    <td>{bet.userName}</td>
+                    <td>{bet.username}</td>
                   )}
 
                   <td className="text-center text-nowrap">{bet.roundid}</td>

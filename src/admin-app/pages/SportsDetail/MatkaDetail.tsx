@@ -213,7 +213,7 @@ import { AxiosResponse } from "axios";
 import moment from "moment-timezone";
 import { useAppSelector } from "../../../redux/hooks";
 import { selectUserData } from "../../../redux/actions/login/loginSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MatkaDetail = () => {
   const [casinoData, setCasinoData] = React.useState<any>([]);
@@ -272,6 +272,7 @@ const MatkaDetail = () => {
       setFilteredData(allData);
     });
   }, []);
+  
 
   const groupedData = filteredData.reduce((acc: any, bet: any) => {
     const key = bet.roundid; // ✅ roundid se grouping
