@@ -6393,6 +6393,8 @@ img.rrotate {
 
 .admin {
   width: 100%;
+  transform: scale(1.2);
+  transform-origin: top left;
 }
 
 .drawer-header {
