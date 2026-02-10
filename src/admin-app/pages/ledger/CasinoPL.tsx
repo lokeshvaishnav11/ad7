@@ -307,6 +307,19 @@ const CasinoPL = () => {
     });
   }, []);
 
+  useEffect(() => {
+  if (showModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [showModal]);
+
+
   return (
     <div className="container">
       <h4 className="text-center my-3">Matka Profit Loss</h4>
@@ -367,83 +380,155 @@ const CasinoPL = () => {
       </div>
 
       {/* ================= MODAL ================= */}
-      {showModal && (
-        <>
-          <div
-            className="modal fade show"
-            style={{ display: "block" }}
+    {showModal && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.5)",
+      zIndex: 9999,
+      display: "flex",
+      alignItems: "flex-end",
+    }}
+    onClick={() => setShowModal(false)}
+  >
+    <div
+      style={{
+        background: "#fff",
+        width: "100%",
+        maxHeight: "90vh",
+        display: "flex",
+        flexDirection: "column",
+        borderTopLeftRadius: "12px",
+        borderTopRightRadius: "12px",
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* HEADER */}
+      <div
+        style={{
+          padding: "10px 15px",
+          borderBottom: "1px solid #ddd",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h5 style={{ margin: 0, fontSize: "16px" }}>
+          Match Details – {selectedMatch?.matchId}
+        </h5>
+        <button
+          onClick={() => setShowModal(false)}
+          style={{
+            border: "none",
+            background: "none",
+            fontSize: "22px",
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+      </div>
+
+      {/* BODY (SCROLLABLE) */}
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          padding: "10px",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <div style={{ overflowX: "auto" }}>
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              fontSize: "12px",
+            }}
           >
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">
-                    Match Details – {selectedMatch?.matchId}
-                  </h5>
-                  <button
-                    type="button"
-                    className="close"
-                    onClick={() => setShowModal(false)}
+            <thead>
+              <tr>
+                {[
+                  
+                  "Client",
+                  "Market",
+                  "Com +",
+                  "Com -",
+                  "Stake",
+                  "Profit",
+                 
+                ].map((h) => (
+                  <th
+                    key={h}
+                    style={{
+                      border: "1px solid #ccc",
+                      padding: "6px",
+                      whiteSpace: "nowrap",
+                      background: "#f8f8f8",
+                    }}
                   >
-                    <span>&times;</span>
-                  </button>
-                </div>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {selectedMatch?.bets?.map((bet: any, i: number) => (
+                <tr key={i}>
+                  {[
+                    // bet.createdAt,
+                    bet.username|| "-",
+                    bet.marketName || "Matka",
+                    bet.commissionlega,
+                    bet.commissiondega,
+                    bet.fammount,
+                    bet.profit || 0,
+                    // bet.loss || 0,
+                    // bet.status,
+                  ].map((v, idx) => (
+                    <td
+                      key={idx}
+                      style={{
+                        border: "1px solid #ccc",
+                        padding: "6px",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {v}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-                <div className="modal-body">
-                  <div className="table-responsive">
-                    <table className="table table-bordered table-sm">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Client</th>
-                          <th>Market</th>
-                          <th>Rate</th>
-                          <th>Number</th>
-                          <th>Stake</th>
-                          <th>Profit</th>
-                          <th>Loss</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {selectedMatch?.bets?.map(
-                          (bet: any, i: number) => (
-                            <tr key={i}>
-                              <td>{bet.createdAt}</td>
-                              <td>{bet.clientName || "-"}</td>
-                              <td>{bet.marketName || "Matka"}</td>
-                              <td>{bet.rate}</td>
-                              <td>{bet.number}</td>
-                              <td>{bet.stake}</td>
-                              <td>{bet.profit || 0}</td>
-                              <td>{bet.loss || 0}</td>
-                              <td>{bet.status}</td>
-                            </tr>
-                          )
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+      {/* FOOTER */}
+      <div
+        style={{
+          padding: "10px",
+          borderTop: "1px solid #ddd",
+          textAlign: "right",
+        }}
+      >
+        <button
+          onClick={() => setShowModal(false)}
+          style={{
+            padding: "6px 12px",
+            fontSize: "14px",
+            cursor: "pointer",
+          }}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
-                <div className="modal-footer">
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* BACKDROP */}
-          <div
-            className="modal-backdrop fade show"
-            onClick={() => setShowModal(false)}
-          />
-        </>
-      )}
     </div>
   );
 };
