@@ -658,7 +658,7 @@ const Header = () => {
           </div>
 
           <div
-            style={{ marginLeft: "-9rem" }}
+            style={{ marginLeft: "-7rem" }}
             className={`side-menu-buttonn  ${
               !isOpen2 ? "hidden" : "block"
             } font-bold text-white md:hidden`}
