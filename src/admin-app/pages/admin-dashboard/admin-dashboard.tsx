@@ -335,6 +335,11 @@ const AdminDashboard = () => {
     }));
   };
 
+  const handleClick = () => {
+    // setImgSrc("imgs/opps.png");
+    alert("Opsss ! This Game is Comming Soon")
+  };
+
   return (
     <>
       {/* {mobileSubheader.subheaderdesktopadmin(
@@ -344,7 +349,7 @@ const AdminDashboard = () => {
 
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-12 main-container">
+          <div className="col-md-12 main-container pad-ing">
             <div className="card-body">
               <div
                 className="table-responsive data-table"
@@ -411,9 +416,48 @@ const AdminDashboard = () => {
                               borderRadius: "10px",
                               // width: "150px",
                             }}
+                             
                           />
                           <span className="casino_img_text">Matka</span>
                         </CustomLink>
+                      </div>
+                    </div>
+                    <div className="col-3 col-md-2 event-row p-0 float-left mt-3">
+                      <div
+                        style={{ border: "none" }}
+                        className="card-body m-0 p-0"
+                      >
+                        < div className="block">
+                          <img
+                            className="casino_img"
+                            src={"imgs/ludo-9xpro.png"}
+                            style={{
+                              borderRadius: "10px",
+                              // width: "150px",
+                            }}
+                            onClick={handleClick}
+                          />
+                          <span className="casino_img_text">Ludo</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-3 col-md-2 event-row p-0 float-left mt-3">
+                      <div
+                        style={{ border: "none" }}
+                        className="card-body m-0 p-0"
+                      >
+                        <div className="block">
+                          <img
+                            className="casino_img"
+                            src={"imgs/kabaddi-img.png"}
+                            style={{
+                              borderRadius: "10px",
+                              // width: "150px",
+                            }}
+                             onClick={handleClick}
+                          />
+                          <span className="casino_img_text">Kabbadi</span>
+                        </div>
                       </div>
                     </div>
                   </div>

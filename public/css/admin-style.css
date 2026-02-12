@@ -8248,3 +8248,8 @@ button.btn-close::after {
 .mlc-5 {
   margin-left: 5px;
 }
+
+.pad-ing{
+  padding-left: 0px;
+  padding-right: 0px;
+}
