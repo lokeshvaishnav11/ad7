@@ -1141,7 +1141,7 @@ const ClientBetsLedger = () => {
                               <td className="ng-scope">
                                 <span
                                   className={
-                                    row.total < 0
+                                    row.totall < 0
                                       ? "text-danger"
                                       : "text-success"
                                   }

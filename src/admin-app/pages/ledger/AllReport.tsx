@@ -134,7 +134,7 @@ const AllReport = () => {
   //       };
 
   //     });
-  //     //console.log(finalLedger,"heloo world final ledger is here")
+      // console.log(finalLedger,"heloo world final ledger is here")
 
   //     setLedgerTotal(finalTotals);
 
@@ -209,6 +209,7 @@ const AllReport = () => {
         mCom: 0,
         sCom: 0,
         tCom: 0,
+        mtCom:0,
         gTotal: 0,
         upDownShare: 0,
         balance: 0,
@@ -235,7 +236,9 @@ const AllReport = () => {
           finalTotals.session += session;
           finalTotals.mCom += matchc;
           finalTotals.sCom += fancyc;
+          finalTotals.mtCom += mtCom;
           finalTotals.tCom += ctotal;
+          
           finalTotals.gTotal += total;
           finalTotals.upDownShare += (values.ss / 100) * total;
           finalTotals.balance += total - (values.ss / 100) * total;
@@ -258,7 +261,7 @@ const AllReport = () => {
           };
         }
       );
-      //console.log(finalLedger, "heloo world final ledger is here");
+      console.log(finalLedger,finalTotals, "heloo world final ledger is here");
 
       setLedgerTotal(finalTotals);
 
@@ -801,6 +804,9 @@ const AllReport = () => {
                       <th className="navbar-bet99 text-dark pt-1 pb-1 small">
                         S.Com
                       </th>
+                       <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        Mt.Com
+                      </th>
                       <th className="navbar-bet99 text-dark pt-1 pb-1 small">
                         T.Com
                       </th>
@@ -869,6 +875,16 @@ const AllReport = () => {
                         >
                           {ledgerTotal?.sCom?.toFixed(2)}
                         </span>
+
+                      </td>
+
+                       <td className="pt-1 pb-1">
+                        <span
+                          ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
+                          className="ng-binding text-danger"
+                        >
+                          {ledgerTotal?.mtCom?.toFixed(2)}
+                        </span>
                       </td>
                       <td className="pt-1 pb-1">
                         <span
@@ -878,6 +894,7 @@ const AllReport = () => {
                           {ledgerTotal?.tCom?.toFixed(2)}
                         </span>
                       </td>
+                       
                       <td className="pt-1 pb-1">
                         <span
                           className={
@@ -925,184 +942,3 @@ const AllReport = () => {
 };
 
 export default AllReport;
-
-// import React from "react";
-// import betService from "../../../services/bet.service";
-// import ReportModal from "./ReportModal";
-// import { useAppSelector } from "../../../redux/hooks";
-// import { selectUserData } from "../../../redux/actions/login/loginSlice";
-
-// type GroupedLedger = {
-//   username: string;
-//   cname: string;
-//   ss: number;
-//   matchPlusMinus: number;
-//   sessionPlusMinus: number;
-//   matchcommision: number;
-//   fancycommmision: number;
-// };
-
-// const AllReport = () => {
-//   const userState = useAppSelector(selectUserData);
-
-//   const [ledgerData, setLedgerData] = React.useState<any[]>([]);
-//   const [ledgerTotal, setLedgerTotal] = React.useState<any>({});
-
-//   const [startDate, setStartDate] = React.useState("");
-//   const [endDate, setEndDate] = React.useState("");
-
-//   const [selectedUser, setSelectedUser] = React.useState<string | null>(null);
-//   const [optionuser, setOptionuser] = React.useState("all");
-//   const [searchTerm, setSearchTerm] = React.useState("");
-
-//   // ✅ ZOOM STATE
-//   const [zoom, setZoom] = React.useState(1);
-
-//   const handleDateFilter = async (isFilterApplied = false) => {
-//     try {
-//       const res = await betService.twoledger();
-//       const rawData = (res.data?.data || []).filter(
-//         (item: any) => item?.settled !== true
-//       );
-
-//       const filteredData = isFilterApplied
-//         ? rawData.filter((item: any) => {
-//             const createdAt = new Date(item.createdAt);
-//             const from = startDate ? new Date(startDate) : null;
-//             const to = endDate ? new Date(endDate) : null;
-
-//             return (
-//               (!from || createdAt >= from) &&
-//               (!to || createdAt <= to)
-//             );
-//           })
-//         : rawData;
-
-//       const grouped: Record<string, GroupedLedger & { updownTotal: number }> =
-//         {};
-
-//       filteredData.forEach((item: any) => {
-//         const childId = item.ChildId || item.ParentId;
-//         const isFancy = item.Fancy;
-//         const money = Number(item.fammount) || 0;
-//         const commission = Number(item.commissiondega) || 0;
-
-//         if (!grouped[childId]) {
-//           grouped[childId] = {
-//             username: item.username,
-//             cname: item.cname,
-//             ss: item.superShare,
-//             matchPlusMinus: 0,
-//             sessionPlusMinus: 0,
-//             matchcommision: 0,
-//             fancycommmision: 0,
-//             updownTotal: 0,
-//           };
-//         }
-
-//         if (isFancy) {
-//           grouped[childId].sessionPlusMinus += money;
-//           grouped[childId].fancycommmision += commission;
-//         } else {
-//           grouped[childId].matchPlusMinus += money;
-//           grouped[childId].matchcommision += commission;
-//         }
-//       });
-
-//       const totals = {
-//         match: 0,
-//         session: 0,
-//         mCom: 0,
-//         sCom: 0,
-//         tCom: 0,
-//         gTotal: 0,
-//         upDownShare: 0,
-//         balance: 0,
-//       };
-
-//       const finalLedger = Object.values(grouped).map((v) => {
-//         const match = v.matchPlusMinus;
-//         const session = v.sessionPlusMinus;
-//         const mCom = v.matchcommision;
-//         const sCom = v.fancycommmision;
-//         const tCom = mCom + sCom;
-//         const total = match + session - tCom;
-//         const share = (v.ss / 100) * total;
-
-//         totals.match += match;
-//         totals.session += session;
-//         totals.mCom += mCom;
-//         totals.sCom += sCom;
-//         totals.tCom += tCom;
-//         totals.gTotal += total;
-//         totals.upDownShare += share;
-//         totals.balance += total - share;
-
-//         return {
-//           client: v.username,
-//           cname: v.cname,
-//           ss: v.ss,
-//           match,
-//           session,
-//           totall: match + session,
-//           mCom,
-//           sCom,
-//           tCom,
-//           gTotal: total,
-//           upDownShare: share,
-//           balance: total - share,
-//         };
-//       });
-
-//       setLedgerData(finalLedger);
-//       setLedgerTotal(totals);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   React.useEffect(() => {
-//     handleDateFilter(false);
-//   }, []);
-
-//   const filteredLedgerData = ledgerData.filter((row) => {
-//     const matchUser = optionuser === "all" || row.client === optionuser;
-//     const matchSearch = row.client
-//       .toLowerCase()
-//       .includes(searchTerm.toLowerCase());
-//     return matchUser && matchSearch;
-//   });
-
-//   return (
-//     <div style={{ zoom }}>
-//       {/* 🔥 ZOOM CONTROLS */}
-//       <div style={{ display: "flex", gap: 10, marginBottom: 10 ,marginLeft:10}}>
-//         <button
-//           className="btn btn-sm btn-success"
-//           onClick={() => setZoom((z) => Math.min(z + 0.1, 1.5))}
-//         >
-//           +
-//         </button>
-//         <button
-//           className="btn btn-sm btn-danger"
-//           onClick={() => setZoom((z) => Math.max(z - 0.1, 0.3))}
-//         >
-//           −
-//         </button>
-//         <strong style={{ alignSelf: "center" }}>
-//           Zoom: {(zoom * 100).toFixed(0)}%
-//         </strong>
-//       </div>
-
-//       {/* 🔥 REST OF UI SAME */}
-//       <h2 className="ledger-title">All Client Report</h2>
-
-//       {/* TABLE + FOOTER SAME AS BEFORE */}
-//       {/* 👉 Tumhara existing JSX yahin continue karega */}
-//       {/* 👉 Koi logic break nahi hoga */}
-
-//     </div>
-//   );
-// };
-
-// export default AllReport;
