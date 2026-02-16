@@ -356,7 +356,7 @@ const AllReport = () => {
           <option value="all"></option>
           {ledgerData.map((row: any, index) => (
             <option key={index} value={row.client}>
-              {row.client}
+              {row.client}/{row.cname}
             </option>
           ))}
         </select>
@@ -645,7 +645,7 @@ const AllReport = () => {
         </div>
       </div>
 
-      <div
+      {/* <div
         className="card-body bg-light p-0"
         style={{
           position: "fixed",
@@ -764,7 +764,162 @@ const AllReport = () => {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
+
+       <div
+                className="card-body bg-light p-0"
+                style={{
+                  position: "fixed",
+                  zIndex: "50",
+                  bottom: "0px",
+                  left: "0px",
+                  width: "100%",
+                  overflow: "auto",
+                }}
+              >
+                <table
+                  className="table table-striped table-bordered p-0 m-0"
+                  style={{ width: "100%" }}
+                >
+                  <thead className="small">
+                    <tr>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        -
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        Match (+/-)
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        Session (+/-)
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        Total
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        M.Com
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        S.Com
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        T.Com
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        G. Total
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        UP/Down
+                      </th>
+                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                        Final
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="pt-1 pb-1">
+                        <strong>TOTAL</strong>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            ledgerTotal?.match?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
+                        >
+                          {ledgerTotal?.match?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            ledgerTotal?.session?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
+                        >
+                          {ledgerTotal?.session?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            (ledgerTotal?.match + ledgerTotal?.session).toFixed(
+                              2
+                            ) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
+                        >
+                          {(ledgerTotal?.match + ledgerTotal?.session).toFixed(
+                            2
+                          )}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          ng-class="totalPandL.match_comm > 0 ? 'text-danger' : 'text-danger'"
+                          className="ng-binding text-danger"
+                        >
+                          {ledgerTotal?.mCom?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          ng-class="totalPandL.sess_comm > 0 ? 'text-danger' : 'text-danger'"
+                          className="ng-binding text-danger"
+                        >
+                          {ledgerTotal?.sCom?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
+                          className="ng-binding text-danger"
+                        >
+                          {ledgerTotal?.tCom?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            ledgerTotal?.gTotal?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
+                        >
+                          {ledgerTotal?.gTotal?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            ledgerTotal?.upDownShare?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
+                        >
+                          {ledgerTotal?.upDownShare?.toFixed(2)}
+                        </span>
+                      </td>
+                      <td className="pt-1 pb-1">
+                        <span
+                          className={
+                            (
+                              Number(ledgerTotal?.balance || 0) 
+                            ) > 0
+                              ? "text-success"
+                              : "text-danger"
+                          }
+
+                        // className="ng-binding text-success"
+                        >
+                          {(
+                            ledgerTotal?.balance?.toFixed(2)
+                            
+                          )}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
     </div>
   );
 };

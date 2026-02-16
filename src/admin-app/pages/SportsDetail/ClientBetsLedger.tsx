@@ -84,13 +84,13 @@ const ClientBetsLedger = () => {
   const [sendid, setSendid] = React.useState(null);
   const [stack, setStack] = React.useState<any[]>([]);
   const bookFancy: FancyBook = useAppSelector(selectBookFancy);
-    const [book, setBook] = React.useState<Record<string, number>>({});
-      const [isOpen, setIsOpen] = React.useState(false);
-    
+  const [book, setBook] = React.useState<Record<string, number>>({});
+  const [isOpen, setIsOpen] = React.useState(false);
+
 
   const maid = useParams().id;
-    const dispatch = useAppDispatch();
-  
+  const dispatch = useAppDispatch();
+
 
   React.useEffect(() => {
     accountService.matchdetail2().then((res: AxiosResponse) => {
@@ -170,18 +170,18 @@ const ClientBetsLedger = () => {
     });
   }, [maid]);
 
-   React.useEffect(() => {
-      if (bookFancy.matchId) {
-        bookService.getFancyBook(bookFancy).then((res: AxiosResponse) => {
-          setBook(res.data.data);
-          setIsOpen(true);
-        });
-      }
-    }, [bookFancy]);
-    const close = () => {
-      dispatch(setBookFancy({} as FancyBook));
-      setIsOpen(false);
-    };
+  React.useEffect(() => {
+    if (bookFancy.matchId) {
+      bookService.getFancyBook(bookFancy).then((res: AxiosResponse) => {
+        setBook(res.data.data);
+        setIsOpen(true);
+      });
+    }
+  }, [bookFancy]);
+  const close = () => {
+    dispatch(setBookFancy({} as FancyBook));
+    setIsOpen(false);
+  };
   // //console.log(marketData, "fmsjnsdjfksgdfjgksd");
 
   const [ledgerData, setLedgerData] = React.useState([]);
@@ -434,7 +434,7 @@ const ClientBetsLedger = () => {
             <option value="all">All Clients</option>
             {ledgerData.map((row: any, index) => (
               <option key={index} value={row.client}>
-                {row.client}
+                {row.client}/{row.cname}
               </option>
             ))}
           </select>
@@ -478,11 +478,11 @@ const ClientBetsLedger = () => {
                         <td className="pt-1 pb-1">{team?.runnerName}</td>
                         <td
                           className={`pt-1 pb-1 ${((team?.totalStack || 0) +
-                              (team?.profitLoss || 0)) *
-                              (shared * 0.01) >
-                              0
-                              ? "text-red-500"
-                              : "text-green-500"
+                            (team?.profitLoss || 0)) *
+                            (shared * 0.01) >
+                            0
+                            ? "text-red-500"
+                            : "text-green-500"
                             }`}
                         >
                           {/* <p>{team?.profitLoss}</p> */}
@@ -590,8 +590,8 @@ const ClientBetsLedger = () => {
                         </td>
                         <td
                           className={`pt-2 pb-1 ${bet?.profitLoss < 0
-                              ? "text-red-500"
-                              : "text-green-500"
+                            ? "text-red-500"
+                            : "text-green-500"
                             }`}
                         >
                           {bet?.stack}
@@ -689,187 +689,186 @@ const ClientBetsLedger = () => {
           </div>
 
           <div>
-               {session ? (
-                          <div className="card-heade p-0 mb-20 " id="headig">
-                            {[
-                              //@ts-expect-error
-                              ...new Map(
-                                marketonlyf?.map((item) => [item?.selectionId, item])
-                              ).values(),
-                            ]
-                              // ⭐ RESULT WALI FANCY NEECHHE, BINA RESULT WALI UPAR
-                              .sort((a: any, b: any) => {
-                                const aHasResult = a?.fancy?.result ? 1 : 0;
-                                const bHasResult = b?.fancy?.result ? 1 : 0;
-                                return aHasResult - bHasResult;
-                              })
-                              .map((bet, index) => {
-                                // ⭐ ADD — Total P/L Code
-                                const totalPL = marketonlyf
-                                  ?.filter((x) => x.selectionId === bet?.selectionId)
-                                  ?.reduce((acc, curr) => acc + (curr?.profitLoss || 0), 0);
-            
-                                return (
-                                  <>
-                                    <h6 className="mb-2" key={bet?.selectionId}>
-                                      <button
-                                        onClick={() => {
-                                          setSendid((prev) =>
-                                            prev === bet?.selectionId
-                                              ? null
-                                              : bet?.selectionId
-                                          );
-            
-                                          dispatch(
-                                            setBookFancy({
-                                              matchId: bet?.matchId,
-                                              selectionId: bet?.selectionId,
-                                              marketName: bet?.selectionName,
-                                            })
-                                          );
-                                        }}
-                                        className="p-2 small badge navbar-bet99 w-100 text-left border text-dark ng-binding"
-                                      >
-                                        {bet?.selectionName}
-                                        <span
-                                          className="badge float-right ml-2"
-                                          style={{
-                                            background: totalPL < 0 ? "green" : "red",
-                                            color: "white",
-                                          }}
-                                        >
-                                         {/* {(totalPL * (shared * 0.01)).toFixed()} */}
-            
-                                        </span>
-                                        <span className="badge badge-light float-right ng-binding ng-scope">
-                                          {/* {bet?.declared === 1 && ( */}
-                                          <i className="fas fa-trophy"></i>
-                                          {bet?.fancy?.result ? bet?.fancy?.result : ""}
-                                          {/* // )} */}
-                                        </span>
-                                      </button>
-                                    </h6>
-                                    {sendid === bet?.selectionId && (
-                                      <>
-                                        <div className="card mb-2">
-                                          <div className="card-body p-0">
-                                            <table className="table table-striped table-bordered table-hover">
-                                              <thead className="small">
-                                                <tr>
-                                                  <th className="pt-0 pb-0">Client</th>
-                                                  <th className="pt-0 pb-0">-</th>
-                                                  {/* <th className="pt-0 pb-0">Rate</th> */}
-            
-                                                  <th className="pt-0 pb-0">-</th>
-                                                 
-                                                    <th className="pt-0 pb-0">Amount</th>
-                                                  
-                                                  {/* {bet?.status == "completed" && (
+            {session ? (
+              <div className="card-heade p-0 mb-20 " id="headig">
+                {[
+                  //@ts-expect-error
+                  ...new Map(
+                    marketonlyf?.map((item) => [item?.selectionId, item])
+                  ).values(),
+                ]
+                  // ⭐ RESULT WALI FANCY NEECHHE, BINA RESULT WALI UPAR
+                  .sort((a: any, b: any) => {
+                    const aHasResult = a?.fancy?.result ? 1 : 0;
+                    const bHasResult = b?.fancy?.result ? 1 : 0;
+                    return aHasResult - bHasResult;
+                  })
+                  .map((bet, index) => {
+                    // ⭐ ADD — Total P/L Code
+                    const totalPL = marketonlyf
+                      ?.filter((x) => x.selectionId === bet?.selectionId)
+                      ?.reduce((acc, curr) => acc + (curr?.profitLoss || 0), 0);
+
+                    return (
+                      <>
+                        <h6 className="mb-2" key={bet?.selectionId}>
+                          <button
+                            onClick={() => {
+                              setSendid((prev) =>
+                                prev === bet?.selectionId
+                                  ? null
+                                  : bet?.selectionId
+                              );
+
+                              dispatch(
+                                setBookFancy({
+                                  matchId: bet?.matchId,
+                                  selectionId: bet?.selectionId,
+                                  marketName: bet?.selectionName,
+                                })
+                              );
+                            }}
+                            className="p-2 small badge navbar-bet99 w-100 text-left border text-dark ng-binding"
+                          >
+                            {bet?.selectionName}
+                            <span
+                              className="badge float-right ml-2"
+                              style={{
+                                background: totalPL < 0 ? "green" : "red",
+                                color: "white",
+                              }}
+                            >
+                              {/* {(totalPL * (shared * 0.01)).toFixed()} */}
+
+                            </span>
+                            <span className="badge badge-light float-right ng-binding ng-scope">
+                              {/* {bet?.declared === 1 && ( */}
+                              <i className="fas fa-trophy"></i>
+                              {bet?.fancy?.result ? bet?.fancy?.result : ""}
+                              {/* // )} */}
+                            </span>
+                          </button>
+                        </h6>
+                        {sendid === bet?.selectionId && (
+                          <>
+                            <div className="card mb-2">
+                              <div className="card-body p-0">
+                                <table className="table table-striped table-bordered table-hover">
+                                  <thead className="small">
+                                    <tr>
+                                      <th className="pt-0 pb-0">Client</th>
+                                      <th className="pt-0 pb-0">-</th>
+                                      {/* <th className="pt-0 pb-0">Rate</th> */}
+
+                                      <th className="pt-0 pb-0">-</th>
+
+                                      <th className="pt-0 pb-0">Amount</th>
+
+                                      {/* {bet?.status == "completed" && (
                                                     <th className="pt-0 pb-0">PnL</th>
                                                   )} */}
-            
-                                                  <th className="pt-0 pb-0">Created</th>
-                                                  {userState?.user?.role == "admin" && (
-                                                    <th className="pt-0 pb-0">IP</th>
-                                                  )}
-                                                </tr>
-                                              </thead>
-                                              <tbody className="small">
-                                                {marketonlyf
-                                                  ?.filter(
-                                                    (bet) => bet?.selectionId === sendid
-                                                  )
-                                                  .map((bet, index) => (
-                                                    <tr key={index}>
-                                                      <td
-                                                        style={{
-                                                          fontSize: "10px",
-                                                          minWidth: "180px",
-                                                          whiteSpace: "normal",
-                                                          wordBreak: "break-word",
-                                                        }}
-                                                        className="p-1 pt-2"
-                                                      >
-                                                        {bet?.parentData
-                                                          ?.slice(
-                                                            bet?.parentData.indexOf(
-                                                              userState.user.username
-                                                            ) + 1
-                                                          )
-                                                          .join("/")}
-                                                        /{bet?.userName}/({bet?.userCode})
-                                                      </td>
-                                                      <td className="pt-2 pb-1">
-                                                        {bet?.odds}
-                                                      </td>
-                                                      {/* <td className="pt-2 pb-1">{bet?.volume}</td> */}
-            
-                                                      <td className="pt-2 pb-1">
-                                                        {bet?.isBack ? (
-                                                          <>
-                                                            <button
-                                                              className="btn-yes btn btn-sm p-1 ng-scope d-flex"
-                                                              style={{
-                                                                fontSize: "xx-small",
-                                                              }}
-                                                            >
-                                                              <div
-                                                                className="badge badge-light"
-                                                                style={{ fontSize: "14px" }}
-                                                              >
-                                                                YES
-                                                              </div>
-                                                            </button>
-                                                            <span
-                                                              style={{
-                                                                fontSize: "12px",
-                                                                marginLeft: "5px",
-                                                              }}
-                                                            >
-                                                              {bet?.volume}
-                                                            </span>
-                                                          </>
-                                                        ) : (
-                                                          <>
-                                                            <button
-                                                              className="btn-not btn btn-sm p-1 ng-scope"
-                                                              style={{
-                                                                fontSize: "xx-small",
-                                                                backgroundColor: "red",
-                                                              }}
-                                                            >
-                                                              <span
-                                                                className="badge badge-light"
-                                                                style={{ fontSize: "14px" }}
-                                                              >
-                                                                NOT
-                                                              </span>
-                                                            </button>
-                                                            <span
-                                                              style={{
-                                                                fontSize: "12px",
-                                                                marginLeft: "5px",
-                                                              }}
-                                                            >
-                                                              {bet?.volume}
-                                                            </span>
-                                                          </>
-                                                        )}
-                                                      </td>
-            
-                                                    
-                                                     
-                                                        <td
-                                                          className={`pt-2 pb-1 ${
-                                                            bet?.profitLoss < 0
-                                                              ? "text-black-500"
-                                                              : "text-black-500"
-                                                          }`}
-                                                        >
-                                                          {bet?.stack}
-                                                        </td>
-                                                     
-            {/* 
+
+                                      <th className="pt-0 pb-0">Created</th>
+                                      {userState?.user?.role == "admin" && (
+                                        <th className="pt-0 pb-0">IP</th>
+                                      )}
+                                    </tr>
+                                  </thead>
+                                  <tbody className="small">
+                                    {marketonlyf
+                                      ?.filter(
+                                        (bet) => bet?.selectionId === sendid
+                                      )
+                                      .map((bet, index) => (
+                                        <tr key={index}>
+                                          <td
+                                            style={{
+                                              fontSize: "10px",
+                                              minWidth: "180px",
+                                              whiteSpace: "normal",
+                                              wordBreak: "break-word",
+                                            }}
+                                            className="p-1 pt-2"
+                                          >
+                                            {bet?.parentData
+                                              ?.slice(
+                                                bet?.parentData.indexOf(
+                                                  userState.user.username
+                                                ) + 1
+                                              )
+                                              .join("/")}
+                                            /{bet?.userName}/({bet?.userCode})
+                                          </td>
+                                          <td className="pt-2 pb-1">
+                                            {bet?.odds}
+                                          </td>
+                                          {/* <td className="pt-2 pb-1">{bet?.volume}</td> */}
+
+                                          <td className="pt-2 pb-1">
+                                            {bet?.isBack ? (
+                                              <>
+                                                <button
+                                                  className="btn-yes btn btn-sm p-1 ng-scope d-flex"
+                                                  style={{
+                                                    fontSize: "xx-small",
+                                                  }}
+                                                >
+                                                  <div
+                                                    className="badge badge-light"
+                                                    style={{ fontSize: "14px" }}
+                                                  >
+                                                    YES
+                                                  </div>
+                                                </button>
+                                                <span
+                                                  style={{
+                                                    fontSize: "12px",
+                                                    marginLeft: "5px",
+                                                  }}
+                                                >
+                                                  {bet?.volume}
+                                                </span>
+                                              </>
+                                            ) : (
+                                              <>
+                                                <button
+                                                  className="btn-not btn btn-sm p-1 ng-scope"
+                                                  style={{
+                                                    fontSize: "xx-small",
+                                                    backgroundColor: "red",
+                                                  }}
+                                                >
+                                                  <span
+                                                    className="badge badge-light"
+                                                    style={{ fontSize: "14px" }}
+                                                  >
+                                                    NOT
+                                                  </span>
+                                                </button>
+                                                <span
+                                                  style={{
+                                                    fontSize: "12px",
+                                                    marginLeft: "5px",
+                                                  }}
+                                                >
+                                                  {bet?.volume}
+                                                </span>
+                                              </>
+                                            )}
+                                          </td>
+
+
+
+                                          <td
+                                            className={`pt-2 pb-1 ${bet?.profitLoss < 0
+                                                ? "text-black-500"
+                                                : "text-black-500"
+                                              }`}
+                                          >
+                                            {bet?.stack}
+                                          </td>
+
+                                          {/* 
                                                       {bet?.status == "completed" && (
                                                         <td
                                                           className={`pt-2 pb-1 ${
@@ -882,37 +881,37 @@ const ClientBetsLedger = () => {
             
                                                         </td>
                                                       )} */}
-            
-                                                      <td
-                                                        className="pt-2 pb-1"
-                                                        style={{
-                                                          fontSize: "10px",
-                                                          minWidth: "30px",
-                                                          whiteSpace: "normal",
-                                                          wordBreak: "break-word",
-                                                        }}
-                                                      >
-                                                        {moment
-                                                          .utc(bet?.betClickTime)
-                                                          .format("DD/MM/YY, h:mm:ss A")}
-                                                      </td>
-                                                      {userState?.user?.role == "admin" && (
-                                                        <td
-                                                          className="pt-2 pb-1"
-                                                          style={{ fontSize: "xx-small" }}
-                                                        >
-                                                          {
-                                                            bet?.userIp
-                                                            // ?.split(":")
-                                                            // ?.slice(0, 4)
-                                                            // ?.join(":")
-                                                          }
-                                                        </td>
-                                                      )}
-                                                    </tr>
-                                                  ))}
-                                              </tbody>
-                                              {/* <div className="book-badges">
+
+                                          <td
+                                            className="pt-2 pb-1"
+                                            style={{
+                                              fontSize: "10px",
+                                              minWidth: "30px",
+                                              whiteSpace: "normal",
+                                              wordBreak: "break-word",
+                                            }}
+                                          >
+                                            {moment
+                                              .utc(bet?.betClickTime)
+                                              .format("DD/MM/YY, h:mm:ss A")}
+                                          </td>
+                                          {userState?.user?.role == "admin" && (
+                                            <td
+                                              className="pt-2 pb-1"
+                                              style={{ fontSize: "xx-small" }}
+                                            >
+                                              {
+                                                bet?.userIp
+                                                // ?.split(":")
+                                                // ?.slice(0, 4)
+                                                // ?.join(":")
+                                              }
+                                            </td>
+                                          )}
+                                        </tr>
+                                      ))}
+                                  </tbody>
+                                  {/* <div className="book-badges">
                                                                         {Object.keys(book).length > 0 &&
                                                                             Object.keys(book).map((itemKey) => {
                                                                                 const value = book[itemKey];
@@ -933,56 +932,56 @@ const ClientBetsLedger = () => {
                                                                                 );
                                                                             })}
                                                                     </div> */}
-                                            </table>
-                                          </div>
-                                        </div>
-                                        <div
-                                          className="book-badges d-flex flex-wrap gap-2 overflow-auto mt-2 p-2 border rounded"
-                                          // style={{ maxHeight: "70px" }}
-                                        >
-                                          {Object.keys(book).length > 0 &&
-                                            Object.keys(book).map((itemKey) => {
-                                              const value = book[itemKey];
-                                              const isLay = value < 0;
-            
-                                              return (
-                                                <div
-                                                  key={itemKey}
-                                                  className={`book-badge d-flex align-items-center justify-content-between`}
-                                                  style={{
-                                                    minWidth: "60px",
-                                                    padding: "4px 8px",
-                                                    borderRadius: "6px", // #dc3545"
-                                                    fontSize: "12px",
-                                                    // fontWeight: "500",
-                                                    color: isLay
-                                                      ? "#141313ff"
-                                                      : "#090909ff",
-                                                    backgroundColor: isLay
-                                                      ? "#28a745"
-                                                      : "red",
-                                                  }}
-                                                >
-                                                  <span className="badge-label">
-                                                    {itemKey}
-                                                  </span>
-                                                  <span className={`badge-value ms-1 `}>
-                                                  {(-value).toFixed()}
-            
-                                                  </span>
-                                                </div>
-                                              );
-                                            })}
-                                        </div>
-                                      </>
-                                    )}
-                                  </>
-                                );
-                              })}
-                          </div>
-                        ) : (
-                          ""
+                                </table>
+                              </div>
+                            </div>
+                            <div
+                              className="book-badges d-flex flex-wrap gap-2 overflow-auto mt-2 p-2 border rounded"
+                            // style={{ maxHeight: "70px" }}
+                            >
+                              {Object.keys(book).length > 0 &&
+                                Object.keys(book).map((itemKey) => {
+                                  const value = book[itemKey];
+                                  const isLay = value < 0;
+
+                                  return (
+                                    <div
+                                      key={itemKey}
+                                      className={`book-badge d-flex align-items-center justify-content-between`}
+                                      style={{
+                                        minWidth: "60px",
+                                        padding: "4px 8px",
+                                        borderRadius: "6px", // #dc3545"
+                                        fontSize: "12px",
+                                        // fontWeight: "500",
+                                        color: isLay
+                                          ? "#141313ff"
+                                          : "#090909ff",
+                                        backgroundColor: isLay
+                                          ? "#28a745"
+                                          : "red",
+                                      }}
+                                    >
+                                      <span className="badge-label">
+                                        {itemKey}
+                                      </span>
+                                      <span className={`badge-value ms-1 `}>
+                                        {(-value).toFixed()}
+
+                                      </span>
+                                    </div>
+                                  );
+                                })}
+                            </div>
+                          </>
                         )}
+                      </>
+                    );
+                  })}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
@@ -1319,24 +1318,32 @@ const ClientBetsLedger = () => {
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.net_p_l_odds > 0 ?   'text-danger' :'text-success'"
-                          className="ng-binding text-success"
+                          className={
+                            ledgerTotal?.match?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
                         >
                           {ledgerTotal?.match?.toFixed(2)}
                         </span>
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.net_p_l_session > 0 ? 'text-danger' :'text-success'"
-                          className="ng-binding text-danger"
+                          className={
+                            ledgerTotal?.session?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
                         >
                           {ledgerTotal?.session?.toFixed(2)}
                         </span>
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.total_pandl > 0 ? 'text-danger' :'text-success'"
-                          className="ng-binding text-success"
+                          className={
+                            (ledgerTotal?.match + ledgerTotal?.session).toFixed(
+                              2
+                            ) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
                         >
                           {(ledgerTotal?.match + ledgerTotal?.session).toFixed(
                             2
@@ -1369,24 +1376,36 @@ const ClientBetsLedger = () => {
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.total_amount > 0 ? 'text-danger' :'text-success'"
-                          className="ng-binding text-danger"
+                          className={
+                            ledgerTotal?.gTotal?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
                         >
                           {ledgerTotal?.gTotal?.toFixed(2)}
                         </span>
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.my_share > 0 ? 'text-danger' :'text-success'"
-                          className="ng-binding text-danger"
+                          className={
+                            ledgerTotal?.upDownShare?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                          }
+                        // className="ng-binding text-success"
                         >
                           {ledgerTotal?.upDownShare?.toFixed(2)}
                         </span>
                       </td>
                       <td className="pt-1 pb-1">
                         <span
-                          ng-class="totalPandL.net_amt > 0 ? 'text-danger' :'text-success'"
-                          className="ng-binding text-danger"
+                          className={
+                            (
+                              Number(ledgerTotal?.balance || 0) -
+                              Number(ledgerTotal?.upDownShare || 0)
+                            ) > 0
+                              ? "text-success"
+                              : "text-danger"
+                          }
+
+                        // className="ng-binding text-success"
                         >
                           {(
                             ledgerTotal?.balance?.toFixed(2) -
