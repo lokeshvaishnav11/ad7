@@ -348,7 +348,7 @@ const AdminDashboard = () => {
       )} */}
 
       <div className="container-fluid"  style={{ paddingLeft: "2px" ,paddingRight:"2px"}}>
-        <div className="row">
+        <div className="">
           <div className="col-md-12 main-container pad-ing">
             <div className="card-body">
               <div
