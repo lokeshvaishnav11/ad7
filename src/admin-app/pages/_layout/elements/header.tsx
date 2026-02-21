@@ -1473,7 +1473,7 @@ const Header = () => {
                     </ul>
                   </li> */}
 
-                  {userState?.user?.role === RoleType.admin &&  (
+                  {userState?.user?.role === RoleType.admin && location.pathname === "/admin/id-king"   && (
                     <li
                       className={`nav-item dropdown border-b md:w-60 w-fit ${
                         activeMenu === "Setting" ? "bg-active" : ""
