@@ -378,6 +378,8 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import DeleteIcon from "@mui/icons-material/Delete";
 import GroupIcon from "@mui/icons-material/Group";
 import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 const Header = () => {
   const userState = useAppSelector<{ user: User }>(selectUserData);
   const dispatch = useAppDispatch();
@@ -397,6 +399,7 @@ const Header = () => {
   // const [isOpen2, setIsOpen2] = React.useState(false);
 
   const [gameList, setGameList] = React.useState([]);
+  const location = useLocation();
 
   // React.useEffect(() => {
   //   axios
@@ -1470,7 +1473,7 @@ const Header = () => {
                     </ul>
                   </li> */}
 
-                  {userState?.user?.role === RoleType.admin && (
+                  {userState?.user?.role === RoleType.admin && location.pathname === "/admin/id-king"   && (
                     <li
                       className={`nav-item dropdown border-b md:w-60 w-fit ${
                         activeMenu === "Setting" ? "bg-active" : ""
