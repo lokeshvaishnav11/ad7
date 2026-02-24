@@ -96,6 +96,7 @@ const EngageModal: React.FC<EngageModalProps> = ({
   const [filtered, setFiltered] = useState<any[]>([]);
 
   useEffect(() => {
+    console.log(rows, "rows")
     setFiltered(rows || []);
   }, [rows]);
 
@@ -121,6 +122,7 @@ const EngageModal: React.FC<EngageModalProps> = ({
                 <thead style={styles.thead}>
                   <tr>
                     <th style={styles.th}>Match / Round</th>
+                    <th style={styles.th}>-</th>
                     <th style={styles.th}>Exposure</th>
                     <th style={styles.th}>Date</th>
                   </tr>
@@ -143,6 +145,17 @@ const EngageModal: React.FC<EngageModalProps> = ({
                         </td>
 
                         <td style={styles.td}>
+                          <strong>
+                            {
+                              r.bet_on === "FANCY"
+                                ? (r.isBack ? "YES" : "NO")
+                                : r.bet_on === "MATCH_ODDS"
+                                  ? (r.isBack ? "LAGAI" : "KHAI")
+                                  : ""
+                            }
+                          </strong>
+                        </td>
+                        <td style={styles.td}>
                           <span style={styles.exposurePill}>
                             {(Number(r.stack || r.betamount) || 0).toLocaleString()}
                           </span>
@@ -151,11 +164,11 @@ const EngageModal: React.FC<EngageModalProps> = ({
                         <td style={styles.td}>
                           {r.betClickTime
                             ? moment
-                                .utc(r.betClickTime)
-                                .format("MMMM Do YYYY, h:mm:ss A")
-                            :  moment(r.createdAt)
-        .tz("Asia/Kolkata")
-        .format("DD/MM/YYYY hh:mm:ss A")}
+                              .utc(r.betClickTime)
+                              .format("MMMM Do YYYY, h:mm:ss A")
+                            : moment(r.createdAt)
+                              .tz("Asia/Kolkata")
+                              .format("DD/MM/YYYY hh:mm:ss A")}
                         </td>
                       </tr>
                     ))
