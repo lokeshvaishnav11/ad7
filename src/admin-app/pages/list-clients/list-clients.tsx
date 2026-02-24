@@ -190,23 +190,43 @@ const ListClients = () => {
   }, []);
 
   React.useEffect(() => {
-    setSearchObj({ ...searchObj, username: username! });
+    setSearchObj((prev: any) => ({
+      ...prev,
+      username: username || "",
+      type: newtype || ""
+    }));
   }, [username]);
 
   React.useEffect(() => {
-    const search = searchParams.get("search") ? searchParams.get("search") : "";
-    getList({ username: username!, search: search!, type: "" });
+    const search = searchParams.get("search") || "";
+    const obj = {
+      username: username || "",
+      search: search,
+      type: newtype || "",
+      page: 1
+    };
+  
+    setSearchObj(obj);
     setPage(1);
-  }, [username, searchParams.get("search"), callbacklist]);
+    getList(obj);
+  }, [username, searchParams.get("search"), callbacklist,newtype]);
 
   React.useEffect(() => {
     clientlistdata(users);
   }, [users]);
 
   const handlePageClick = (event: any) => {
-    //
-    setPage(event.selected + 1);
-    getList({ ...searchObj, page: event.selected + 1 });
+    const selectedPage = event.selected + 1;
+  
+    setPage(selectedPage);
+  
+    const updatedObj = {
+      ...searchObj,
+      type: newtype || "", // 🔥 ensure type always goes
+      page: selectedPage
+    };
+  
+    getList(updatedObj);
   };
 
   const openModal = (type: string) => {
@@ -243,11 +263,11 @@ const ListClients = () => {
     status?: string;
     page?: number;
   }) => {
-    if (!obj.page) obj.page = 1;
+  
     setUserList([] as any);
+  
     userService.getUserList(obj).then((res: AxiosResponse<any>) => {
-      setSearchObj(obj);
-      console.log(res.data.data.items, "first data ");
+      setSearchObj(obj); // store latest filters including type
       setUserList(res.data.data);
       clientlistdata(res.data.data.items);
     });
@@ -1045,33 +1065,33 @@ const ListClients = () => {
                         />
                       </th> */}
 
-                      <th className="noExport">U St</th>
+                      <th className="noExport text-center">U St</th>
                       {/* <th className="noExport">B St</th> */}
                       {/* <th></th> */}
                       <th></th>
 
-                      <th>Name</th>
-                      <th>User</th>
-                      <th>Mobile</th>
-                      <th>Password</th>
+                      <th className="text-center">Name</th>
+                      <th className="text-center">User</th>
+                      <th className="text-center">Mobile</th>
+                      <th className="text-center">Password</th>
 
                       {urole !== "dl" && newtype !== "user" && (
-                        <th>{upper?.first} Share %</th>
+                        <th className="text-center">{upper?.first} Share %</th>
                       )}
                       {urole !== "dl" && newtype !== "user" && (
-                        <th>{upper?.second} Share %</th>
+                        <th className="text-center">{upper?.second} Share %</th>
                       )}
 
                       {/* <th>SuperShare Limit</th> */}
-                      <th>Current</th>
+                      <th className="text-center">Current</th>
                       {/* <th>Client (P/L)</th> */}
-                      <th>{newtype === "user" ? "Engaged" : "Agent"}</th>
+                      <th className="text-center">{newtype === "user" ? "Engaged" : "Agent"}</th>
                       {/* <th>Available Balance</th> */}
 
                       {/* <th>Engaged</th> */}
-                      <th>Match %</th>
-                      <th>Session %</th>
-                      <th>Matka %</th>
+                      <th className="text-center">Match %</th>
+                      <th className="text-center">Session %</th>
+                      <th className="text-center">Matka %</th>
 
                       {/* <th>Account Type</th> */}
                       {/* <th className="noExport">Actions</th> */}
@@ -1669,7 +1689,7 @@ const ListClients = () => {
                               {user.role === RoleType.user && (
                                 <p
                                   style={{ padding: "5px 10px" }}
-                                  className="text-blue "
+                                  className="text-blue text-center "
                                 >
                                   {user.username}
                                 </p>
@@ -1716,7 +1736,7 @@ const ListClients = () => {
                             {urole === "dl" || newtype === "user" ? (
                               ""
                             ) : (
-                              <td>
+                              <td className="text-center">
                                 {user?.pshare && user.share != null
                                   ? `${user.pshare - user.share}%`
                                   : "0%"}
@@ -1726,7 +1746,7 @@ const ListClients = () => {
                             {urole == "dl" || newtype === "user" ? (
                               ""
                             ) : (
-                              <td>{user?.share ? user?.share : "0"}%</td>
+                              <td className="text-center">{user?.share ? user?.share : "0"}%</td>
                             )}
 
                             {/* <td>
@@ -1734,9 +1754,9 @@ const ListClients = () => {
                           </td> */}
 
                             {urole === "dl" || newtype === "user" ? (
-                              <td>{mainBalanceUser(user).toFixed(2)}</td>
+                              <td className="text-center">{mainBalanceUser(user).toFixed(2)}</td>
                             ) : (
-                              <td>{mainBalance(user).toFixed(2)}</td>
+                              <td className="text-center">{mainBalance(user).toFixed(2)}</td>
                             )}
 
                             {/* {user.role === "user" ? (
@@ -1747,7 +1767,7 @@ const ListClients = () => {
                           )} */}
 
                             {user.role === "user" ? (
-                              <td>
+                              <td className="text-center" >
                                 {/* <button
                                   onClick={async(user:any) => {
                                     // dummy data for modal
@@ -1830,7 +1850,7 @@ const ListClients = () => {
                                 </button>
                               </td>
                             ) : (
-                              <td>{mainBalancechild(user).toFixed(2)}</td>
+                              <td className="text-center">{mainBalancechild(user).toFixed(2)}</td>
                             )}
 
                             {/* <td
@@ -1853,9 +1873,9 @@ const ListClients = () => {
                           </td> */}
 
                             {/* <td>{user.exposerLimit ? user.exposerLimit : 0}</td> */}
-                            <td>{user.mcom}%</td>
-                            <td>{user.scom}%</td>
-                            <td>{user.matcom}%</td>
+                            <td className="text-center">{user.mcom}%</td>
+                            <td className="text-center">{user.scom}%</td>
+                            <td className="text-center">{user.matcom}%</td>
 
                             {/* <td>{RoleName[user.role!]}</td> */}
                           </tr>
@@ -1864,18 +1884,27 @@ const ListClients = () => {
                   </tbody>
                 </table>
               </div>
-              {/* <ReactPaginate
+              {users?.totalPages && users.totalPages > 1 && (
+  // <ReactPaginate
+  //   pageCount={users.totalPages}
+  //   onPageChange={handlePageClick}
+  //   forcePage={page - 1}
+  // />
+  <ReactPaginate
                 breakLabel="..."
                 nextLabel="Next>>"
                 forcePage={page - 1}
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
-                pageCount={users?.totalPages || 0}
+                pageCount={users.totalPages}
                 containerClassName={"pagination"}
                 activeClassName={"active"}
                 previousLabel={"<<Prev"}
                 breakClassName={"break-me"}
-              /> */}
+          
+              />
+)}
+              
             </div>
 
             {/* <div className=" h-20 mt-10 mb-10 bg-transparent text-white">..................</div> */}
