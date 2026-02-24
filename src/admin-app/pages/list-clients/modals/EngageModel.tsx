@@ -123,6 +123,7 @@ const EngageModal: React.FC<EngageModalProps> = ({
                   <tr>
                     <th style={styles.th}>Match / Round</th>
                     <th style={styles.th}>-</th>
+                      <th style={styles.th}>-</th>
                     <th style={styles.th}>Exposure</th>
                     <th style={styles.th}>Date</th>
                   </tr>
@@ -151,6 +152,17 @@ const EngageModal: React.FC<EngageModalProps> = ({
                                 ? (r.isBack ? "YES" : "NO")
                                 : r.bet_on === "MATCH_ODDS"
                                   ? (r.isBack ? "LAGAI" : "KHAI")
+                                  : ""
+                            }
+                          </strong>
+                        </td>
+                         <td style={styles.td}>
+                          <strong>
+                            {
+                              r.bet_on === "FANCY"
+                                ? (r.odds)
+                                : r.bet_on === "MATCH_ODDS"
+                                  ? (r.selectionName)
                                   : ""
                             }
                           </strong>
