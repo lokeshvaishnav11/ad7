@@ -1014,7 +1014,7 @@ const ListClients = () => {
                 </li>
               </ul> */}
               <div
-                style={{ overflowY: "scroll", paddingBottom: "50vh" }}
+                style={{ overflowY: "scroll", paddingBottom: "5vh" }}
                 className="table-responsive data-table "
                 ref={ref}
               >
@@ -1883,26 +1883,49 @@ const ListClients = () => {
                       })}
                   </tbody>
                 </table>
+             
               </div>
-              {users?.totalPages && users.totalPages > 1 && (
+                 {users?.totalPages && users.totalPages > 1 && (
   // <ReactPaginate
   //   pageCount={users.totalPages}
   //   onPageChange={handlePageClick}
   //   forcePage={page - 1}
   // />
-  <ReactPaginate
-                breakLabel="..."
-                nextLabel="Next>>"
-                forcePage={page - 1}
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={users.totalPages}
-                containerClassName={"pagination"}
-                activeClassName={"active"}
-                previousLabel={"<<Prev"}
-                breakClassName={"break-me"}
+  // <ReactPaginate
+            
+  //               nextLabel="Next>>"
+  //               forcePage={page - 1}
+  //               onPageChange={handlePageClick}
+  //               // pageRangeDisplayed={5}
+  //               pageCount={users.totalPages}
+
+  //                 // ✅ Hide Numbers
+  // pageRangeDisplayed={0}
+  // marginPagesDisplayed={0}
+  // breakLabel={null}
+
+  //               containerClassName={"pagination"}
+  //               activeClassName={"active"}
+  //               previousLabel={"<<Prev"}
+  //               breakClassName={"break-me"}
           
-              />
+  //             />
+
+              <ReactPaginate
+  previousLabel={"<< Prev"}
+  nextLabel={"Next >>"}
+  onPageChange={handlePageClick}
+  forcePage={page - 1}
+  pageCount={users.totalPages}
+
+  // ✅ Hide Numbers
+  pageRangeDisplayed={0}
+  marginPagesDisplayed={0}
+  breakLabel={null}
+
+  containerClassName="pagination"
+  activeClassName="active"
+/>
 )}
               
             </div>
