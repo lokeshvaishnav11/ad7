@@ -350,6 +350,13 @@ const AdminDashboard = () => {
       <div className="container-fluid"  style={{ paddingLeft: "2px" ,paddingRight:"2px"}}>
         <div className="">
           <div className="col-md-12 main-container pad-ing">
+
+
+              <MatchList2
+                  currentMatch={currentMatch}
+                  // memoOdds={}
+                  matchList={matchList}
+                />
             <div className="card-body">
               <div
                 className="table-responsive data-table"
@@ -473,11 +480,7 @@ const AdminDashboard = () => {
                   {/* <tbody>{listItem()}</tbody> */}
                 </table>
 
-                <MatchList2
-                  currentMatch={currentMatch}
-                  // memoOdds={}
-                  matchList={matchList}
-                />
+              
               </div>
             </div>
           </div>
