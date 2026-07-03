@@ -739,7 +739,8 @@ const Header = () => {
             style={{ background: "black" }}
           >
             {/* <img className="" src="/9x.png" /> */}
-            <img className="" style={{ width: "500px" }} src="/imgs/logo.png" />
+            {/* <img className="" style={{ width: "500px" }} src="/imgs/logo.png" /> */}
+           <span style={{color:"white",fontWeight:'bold',fontSize:"20px"}}>7horse</span> 
           </CustomLink>
 
           <div className="">

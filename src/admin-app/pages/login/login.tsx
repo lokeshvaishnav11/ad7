@@ -185,89 +185,176 @@ const Login = () => {
     dispatch(loginAction(loginForm))
   }
 
-  return (
-    <div className='login'>
-      <div className='wrapper d-flex justify-content-center align-items-center'>
-        <div className='container-flui'>
-          <div className='row'>
-            <div className='col-md-12'>
-              <div className='loginInner1 container-fluid'>
-                <div className='featured-box-login featured-box-secundary default log-fld'>
-                  <div className='log-logo m-b-20 text-center'>
-                    <img
-                      src='/imgs/logo.png'
-                      className='logo-login'
-                      style={{ maxWidth: '250px', maxHeight: '100px' }}
-                    />
-                  </div>
+  // return (
+  //   <div className='login'>
+  //     <div className='wrapper d-flex justify-content-center align-items-center'>
+  //       <div className='container-flui'>
+  //         <div className='row'>
+  //           <div className='col-md-12'>
+  //             <div className='loginInner1 container-fluid'>
+  //               <div className='featured-box-login featured-box-secundary default log-fld'>
+  //                 <div className='log-logo m-b-20 text-center'>
+  //                   <img
+  //                     src='/imgs/logo.png'
+  //                     className='logo-login'
+  //                     style={{ maxWidth: '250px', maxHeight: '100px' }}
+  //                   />
+  //                 </div>
 
-                  <form onSubmit={handleSubmit} autoComplete='off'>
-                    {/* USERNAME */}
-                    <div className='form-group m-b-20'>
-                      <input
-                        name='username'
-                        placeholder='User Name'
-                        type='text'
-                        className='form-control'
-                        onChange={handleForm}
-                        required
-                      />
-                    </div>
+  //                 <form onSubmit={handleSubmit} autoComplete='off'>
+  //                   {/* USERNAME */}
+  //                   <div className='form-group m-b-20'>
+  //                     <input
+  //                       name='username'
+  //                       placeholder='User Name'
+  //                       type='text'
+  //                       className='form-control'
+  //                       onChange={handleForm}
+  //                       required
+  //                     />
+  //                   </div>
 
-                    {/* PASSWORD WITH EYE */}
-                    <div className='form-group m-b-20 position-relative'>
-                      <input
-                        name='password'
-                        placeholder='Password'
-                        type={showPassword ? 'text' : 'password'}
-                        className='form-control'
-                        onChange={handleForm}
-                        required
-                      />
+  //                   {/* PASSWORD WITH EYE */}
+  //                   <div className='form-group m-b-20 position-relative'>
+  //                     <input
+  //                       name='password'
+  //                       placeholder='Password'
+  //                       type={showPassword ? 'text' : 'password'}
+  //                       className='form-control'
+  //                       onChange={handleForm}
+  //                       required
+  //                     />
 
-                      <i
-                        className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
-                        style={{
-                          position: 'absolute',
-                          right: '12px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          cursor: 'pointer',
-                          color: '#555',
-                        }}
-                        onClick={() => setShowPassword(!showPassword)}
-                      ></i>
+  //                     <i
+  //                       className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
+  //                       style={{
+  //                         position: 'absolute',
+  //                         right: '12px',
+  //                         top: '50%',
+  //                         transform: 'translateY(-50%)',
+  //                         cursor: 'pointer',
+  //                         color: '#555',
+  //                       }}
+  //                       onClick={() => setShowPassword(!showPassword)}
+  //                     ></i>
 
-                      {userState.error && (
-                        <small className='text-danger'>{userState.error}</small>
-                      )}
-                    </div>
+  //                     {userState.error && (
+  //                       <small className='text-danger'>{userState.error}</small>
+  //                     )}
+  //                   </div>
 
-                    {/* BUTTON */}
-                    <div className='form-group text-center mb-0'>
-                      <SubmitButton
-                        type='submit'
-                        className='btn btn-submit btn-login'
-                        style={{ backgroundColor: '#11283E' }}
-                      >
-                        Login&nbsp;
-                        {userState.status === 'loading' ? (
-                          <i className='fas fa-spinner fa-spin'></i>
-                        ) : (
-                          <i className='fas fa-sign-in-alt'></i>
-                        )}
-                      </SubmitButton>
-                    </div>
-                  </form>
+  //                   {/* BUTTON */}
+  //                   <div className='form-group text-center mb-0'>
+  //                     <SubmitButton
+  //                       type='submit'
+  //                       className='btn btn-submit btn-login'
+  //                       style={{ backgroundColor: '#11283E' }}
+  //                     >
+  //                       Login&nbsp;
+  //                       {userState.status === 'loading' ? (
+  //                         <i className='fas fa-spinner fa-spin'></i>
+  //                       ) : (
+  //                         <i className='fas fa-sign-in-alt'></i>
+  //                       )}
+  //                     </SubmitButton>
+  //                   </div>
+  //                 </form>
 
-                </div>
-              </div>
-            </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
+
+    return (
+    <div className="bh-login-page">
+      {/* HERO / BACKGROUND IMAGE (pure CSS background, no <img> tag) */}
+      <div className="bh-hero">
+        {/* Badge / Logo circle sitting over the hero-card junction */}
+        <div className="bh-badge">
+          <div className="bh-badge-inner">
+            <span style={{    fontSize: "22px"}}>7horse</span>
+            {/* <span></span> */}
           </div>
         </div>
       </div>
+
+      {/* LOGIN CARD */}
+      <div className="bh-card">
+        <h1 className="bh-title">ADMIN LOGIN</h1>
+
+        <form onSubmit={handleSubmit} autoComplete="off" className="bh-form">
+          {/* USERNAME */}
+          <div className="bh-input-wrap">
+            <input
+              name="username"
+              placeholder="Username"
+              type="text"
+              className="bh-input"
+              onChange={handleForm}
+              // required={!isDemoLogin}
+            />
+          </div>
+
+          {/* PASSWORD */}
+          <div className="bh-input-wrap">
+            <input
+              name="password"
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              className="bh-input"
+              onChange={handleForm}
+              // required={!isDemoLogin}
+            />
+
+            <i
+              className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"} bh-eye`}
+              onClick={() => setShowPassword(!showPassword)}
+            ></i>
+          </div>
+
+          {userState.error && (
+            <small className="text-danger bh-error">{userState.error}</small>
+          )}
+
+          {/* BUTTONS */}
+          <div className="bh-btn-group">
+            <SubmitButton type="submit" className="bh-btn-login">
+              Login
+              {userState.status === "loading" ? (
+                <i className="ml-2 fas fa-spinner fa-spin"></i>
+              ) : null}
+            </SubmitButton>
+
+            {/* <SubmitButton
+              type="submit"
+              onClick={handleSubmitDemoLogin}
+              className="bh-btn-demo"
+            >
+              Login with Demo ID
+              {userState.status === "loading" ? (
+                <i className="ml-2 fas fa-spinner fa-spin"></i>
+              ) : null}
+            </SubmitButton> */}
+          </div>
+        </form>
+      </div>
+
+      {/* FOOTER */}
+      {/* <section className="bh-footer">
+        <div className="bh-footer-note">
+          <h2>Note : This site is not for Indian Territory</h2>
+        </div>
+        <div className="bh-powered">
+          <span>Powered by</span>
+          <img src="/imgs/betfair-logo.png" alt="betfair" />
+        </div>
+      </section> */}
     </div>
-  )
+  );
 }
 
 export default Login
