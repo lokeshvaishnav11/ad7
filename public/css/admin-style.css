@@ -1881,6 +1881,15 @@ ul.mtree.transit li.mtree-open>a::after {
   padding-left: 7.5px !important;
 }
 
+.card-header-custom{
+      background: #85852c;
+    color: #fff !important;
+    font-weight: 700;
+    margin-bottom: 0;
+        padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 .main-content {
   max-width: 65% !important;
   -ms-flex: 0 0 65% !important;

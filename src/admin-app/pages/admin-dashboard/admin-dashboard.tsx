@@ -236,8 +236,8 @@ const AdminDashboard = () => {
                       `${ItemMarket.marketId}_${ItemRunners.selectionId}`
                     ] != null
                       ? -userbook[
-                          `${ItemMarket.marketId}_${ItemRunners.selectionId}`
-                        ].toFixed(2)
+                        `${ItemMarket.marketId}_${ItemRunners.selectionId}`
+                      ].toFixed(2)
                       : ""}
                   </span>
                 </td>
@@ -347,140 +347,222 @@ const AdminDashboard = () => {
         "You can view your cricket card books from sport menu."
       )} */}
 
-      <div className="container-fluid"  style={{ paddingLeft: "2px" ,paddingRight:"2px"}}>
+      <div className="container-fluid" style={{ paddingLeft: "2px", paddingRight: "2px" }}>
         <div className="">
           <div className="col-md-12 main-container pad-ing">
 
+            <div className="container mt30">
+              <div
+                className="row"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  marginLeft: "-10px",
+                  marginRight: "-10px",
+                }}
+              >
+                {/* <div
+      style={{
+        width: "50%",
+        padding: "0 10px",
+        marginBottom: "10px",
+        boxSizing: "border-box",
+      }}
+    >
+      <div className="card">
+        <div className="card-header h6 ng-binding">
+          My Account ({newbalance})
+        </div>
+      </div>
+    </div> */}
 
-              <MatchList2
-                  currentMatch={currentMatch}
-                  // memoOdds={}
-                  matchList={matchList}
-                />
+                <div
+                  style={{
+                    width: "50%",
+                    padding: "0 10px",
+                    marginBottom: "10px",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  <div className="card">
+                    <div className=" card-header-custom h6 ng-binding">
+                      My Share ({shared}%)
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    width: "50%",
+                    // padding: "0 10px",
+                    marginBottom: "10px",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  <div className="card">
+                    <div className="card-header-custom h6 ng-binding">
+                      Comm ({detail?.mcom ?? 0}% / {detail?.scom ?? 0}% /{detail?.matcom ?? 0}%)
+                    </div>
+                  </div>
+                </div>
+
+                {getRoleOptions().map((role) => (
+                  <div
+                    key={role.key}
+                    style={{
+                      width: "50%",
+                      padding: "0 10px",
+                      marginBottom: "10px",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <CustomLink
+                      to={`/list-clients/${userState?.user?.username}/${role.key}`}
+                      className="card"
+                      style={{
+                        display: "block",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <div className="card-header-custom h6 ng-binding">
+                        {role.label} (
+                        {userList?.items?.filter((i: any) => i.role === role.key)?.length})
+                      </div>
+                    </CustomLink>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <MatchList2
+              currentMatch={currentMatch}
+              // memoOdds={}
+              matchList={matchList}
+            />
+          
             <div className="card-body">
               <div
                 className="table-responsive data-table"
                 style={{ overflow: "hidden" }}
               >
-                <div className="">
+                <div>
                   <div
-                    className="col-md-12 col-12"
-                    aria-labelledby="navbarDropdowknMenuLink"
-                    style={{ height: "", overflowY: "scroll" }}
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      overflowY: "auto",
+                    }}
                   >
                     {gameList?.length > 0 &&
                       gameList
                         .filter(
                           (item: any) => !item.isDisable && item.match_id !== -1
                         )
-                        .map((Item: any, key: number) => {
-                          return (
-                            //  <li key={key}>
-                            //    <CustomLink to={`/casino/${Item.slug}`} className='block'>
-                            //      <b>{Item.title}</b>
-                            //    </CustomLink>
-
-                            //  </li>
-                            <div
-                              className="col-3 col-md-2 event-row p-0 float-left mt-3"
-                              key={key}
+                        .map((Item: any, key: number) => (
+                          <div
+                            key={key}
+                            style={{
+                              width: "33.3333%",
+                              padding: "8px",
+                              boxSizing: "border-box",
+                            }}
+                          >
+                            <CustomLink
+                              to={`/casino/${Item.slug}`}
+                              className="block"
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                textDecoration: "none",
+                              }}
                             >
-                              <div
-                                style={{ border: "none" }}
-                                className="card-body m-0 p-0"
-                              >
-                                <CustomLink
-                                  to={`/casino/${Item.slug}`}
-                                  className="block"
-                                >
-                                  <img
-                                    className="casino_img"
-                                    src={Item.image}
-                                    style={{
-                                      borderRadius: "10px",
-                                      // width: "150px",
-                                    }}
-                                  />
-                                  <span className="casino_img_text">
-                                    {Item.title}
-                                  </span>
-                                </CustomLink>
-                              </div>
-                            </div>
-                          );
-                        })}
+                              <img
+                                src={Item.image}
+                                alt={Item.title}
+                                style={{
+                                  width: "100%",
+                                  maxWidth: "120px",
+                                  borderRadius: "10px",
+                                  display: "block",
+                                }}
+                              />
 
-                    <div className="col-3 col-md-2 event-row p-0 float-left mt-3">
-                      <div
-                        style={{ border: "none" }}
-                        className="card-body m-0 p-0"
+                              <span
+                                style={{
+                                  marginTop: "8px",
+                                  textAlign: "center",
+                                  color: "#fff",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                  display: "block",
+                                  width: "100%",
+                                  background: "black"
+
+                                }}
+                              >
+                                {Item.title}
+                              </span>
+                            </CustomLink>
+                          </div>
+                        ))}
+
+                    {/* Matka */}
+                    <div
+                      style={{
+                        width: "33.3333%",
+                        padding: "8px",
+                        boxSizing: "border-box",
+                      }}
+                    >
+                      <CustomLink
+                        to="/matka-books"
+                        className="block"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          textDecoration: "none",
+                        }}
                       >
-                        <CustomLink to={`/matka-books`} className="block">
-                          <img
-                            className="casino_img"
-                            src={"imgs/matka.png"}
-                            style={{
-                              borderRadius: "10px",
-                              // width: "150px",
-                            }}
-                             
-                          />
-                          <span className="casino_img_text">Matka</span>
-                        </CustomLink>
-                      </div>
-                    </div>
-                    <div className="col-3 col-md-2 event-row p-0 float-left mt-3">
-                      <div
-                        style={{ border: "none" }}
-                        className="card-body m-0 p-0"
-                      >
-                        < div className="block">
-                          <img
-                            className="casino_img"
-                            src={"imgs/ludo-9xpro.png"}
-                            style={{
-                              borderRadius: "10px",
-                              // width: "150px",
-                            }}
-                            onClick={handleClick}
-                          />
-                          <span className="casino_img_text">Ludo</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-3 col-md-2 event-row p-0 float-left mt-3">
-                      <div
-                        style={{ border: "none" }}
-                        className="card-body m-0 p-0"
-                      >
-                        <div className="block">
-                          <img
-                            className="casino_img"
-                            src={"imgs/kabaddi-img.png"}
-                            style={{
-                              borderRadius: "10px",
-                              // width: "150px",
-                            }}
-                             onClick={handleClick}
-                          />
-                          <span className="casino_img_text">Kabbadi</span>
-                        </div>
-                      </div>
+                        <img
+                          src="imgs/matka.png"
+                          alt="Matka"
+                          style={{
+                            width: "100%",
+                            maxWidth: "120px",
+                            borderRadius: "10px",
+                            display: "block",
+                          }}
+                        />
+
+                        <span
+                          style={{
+                            marginTop: "8px",
+                            textAlign: "center",
+                            color: "#fff",
+                            fontSize: "12px",
+                            fontWeight: "600",
+                            display: "block",
+                            width: "100%",
+                            background: "black"
+                          }}
+                        >
+                          Matka
+                        </span>
+                      </CustomLink>
                     </div>
                   </div>
                 </div>
 
-                <table className="table table">
+                <table className="table">
                   <thead>
                     <tr>
-                      <th className="" style={{ padding: "10px" }}></th>
-                      <th className="" style={{ padding: "10px" }}></th>
+                      <th style={{ padding: "10px" }}></th>
+                      <th style={{ padding: "10px" }}></th>
                     </tr>
                   </thead>
-                  {/* <tbody>{listItem()}</tbody> */}
                 </table>
-
-              
               </div>
             </div>
           </div>
@@ -489,7 +571,7 @@ const AdminDashboard = () => {
             <div className="row">
               <div className="col-6 mb-2 col-md-3 text-center">
                 <CustomLink
-                 to={`/list-clients/${userState?.user?.username}/${getRoleOptions()[0]?.key}`} 
+                  to={`/list-clients/${userState?.user?.username}/${getRoleOptions()[0]?.key}`}
                 >
                   <div className="wap w-100 text-center">
                     <span className="icon-circle">
@@ -499,7 +581,7 @@ const AdminDashboard = () => {
                       />
                     </span>
                     <p className="small mt-2">Agent Details </p>
-                    
+
                   </div>
                 </CustomLink>
               </div>
@@ -548,66 +630,7 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="container mt30">
-            <div className="row">
-              <div className="col-md-4 mb-2">
-                <div className="card ">
-                  <div className="card-header h6 ng-binding">
-                    My Account ( {newbalance} )
-                  </div>
-                </div>
-              </div>
 
-              <div className="col-md-4 mb-2">
-                <div className="card ">
-                  <div className="card-header h6 ng-binding">
-                    My Share ({shared}% )
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4 mb-2">
-                <div className="card ">
-                  <div className="card-header h6 ng-binding">
-                    {/* Match/Sess Comm ( {userState?.user?.partnership[1]?.ownRatio}% / 4% ) */}
-                    Match/Sess/Matka Comm ( {detail?.mcom ?? 0}% / {detail?.scom ?? 0}% / {detail?.matcom}%
-                    )
-                  </div>
-                </div>
-              </div>
-
-              {/* <div
-                className="col-md-4 mb-2 ng-scope"
-                ng-repeat="(key, value) in downline"
-              >
-                <div className="card ">
-                  <div className="card-header h6 ng-binding">
-                    Client ( {userList?.totalItems} )
-                  </div>
-                </div>
-              </div> */}
-
-              {getRoleOptions().map((role) => (
-                <div key={role.key} className="col-md-4 mb-2 ng-scope">
-                  <CustomLink
-                    to={`/list-clients/${userState?.user?.username}/${role.key}`}
-                    // onClick={() => setDropdownOpen(!dropdownOpen)}
-                    //  onClick={toggleDrawer}
-                    className="card"
-                  >
-                    <div className="card-header h6 ng-binding">
-                      {role.label}(
-                      {
-                        userList?.items?.filter(
-                          (i: any) => i.role === `${role.key}`
-                        )?.length
-                      }
-                      )
-                    </div>
-                  </CustomLink>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </>
