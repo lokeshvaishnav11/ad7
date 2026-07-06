@@ -1359,7 +1359,7 @@ const Header = () => {
                           </CustomLink>
                         </li>
 
-                        {userState?.user?.role === "dl" ? (
+                        {userState?.user?.role === "dl" && userState?.user?.comm ? (
                           <li>
                             <CustomLink
                               //  onClick={() => setDropdownOpen3(!dropdownOpen3)}
@@ -1756,7 +1756,7 @@ const Header = () => {
                       activeMenu === "Report" ? "bg-active" : ""
                     } `}
                   >
-                    <a href="https://olddata.7horse.pro"
+                    <a href="https://olddata.7horse.online"
                     >
                       <LocalOfferIcon className="text-warning " />
                       <b className="md:text-lg text-xs font-medium text-white">

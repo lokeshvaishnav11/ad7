@@ -391,7 +391,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
 
-                <div
+               {userState?.user?.comm && <div
                   style={{
                     width: "50%",
                     // padding: "0 10px",
@@ -404,7 +404,7 @@ const AdminDashboard = () => {
                       Comm ({detail?.mcom ?? 0}% / {detail?.scom ?? 0}% /{detail?.matcom ?? 0}%)
                     </div>
                   </div>
-                </div>
+                </div>}
 
                 {getRoleOptions().map((role) => (
                   <div

@@ -10,7 +10,7 @@ export type UserState = {
 
 const initialState: UserState = {
   userData: {
-    user: { _id: '', username: '' },
+    user: { _id: '', username: '',comm:true },
     status: '',
     error: '',
   },

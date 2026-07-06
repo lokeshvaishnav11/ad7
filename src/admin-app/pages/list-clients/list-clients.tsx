@@ -1045,13 +1045,13 @@ const ListClients = () => {
                         {" "}
                         Balance{" "}
                       </th>
-                      <th
+                     {userState.user.comm && <th
                         colSpan={3}
                         className="text-center navbar-bet99 text-dark"
                         rowSpan={1}
                       >
                         Commission{" "}
-                      </th>
+                      </th>}
                     </tr>
                     <tr>
                       {/* <th>
@@ -1086,9 +1086,9 @@ const ListClients = () => {
                       {/* <th>Available Balance</th> */}
 
                       {/* <th>Engaged</th> */}
-                      <th className="text-center">Match %</th>
+                     {userState?.user?.comm && <> <th className="text-center">Match %</th>
                       <th className="text-center">Session %</th>
-                      <th className="text-center">Matka %</th>
+                      <th className="text-center">Matka %</th> </>}
 
                       {/* <th>Account Type</th> */}
                       {/* <th className="noExport">Actions</th> */}
@@ -1698,8 +1698,8 @@ const ListClients = () => {
                               <a
                                 href={`https://wa.me/?text=${encodeURIComponent(
                                   user.username?.startsWith("C")
-                                    ? `Login Details:\nUsername: ${user.username}\nPassword: ${user.password}\n\nLink:\nClient Link: https://7horse.pro`
-                                    : `Login Details:\nUsername: ${user.username}\nPassword: ${user.password}\n\nLinks:\nAdmin Link: https://admin.7horse.pro\nClient Link: https://7horse.pro`
+                                    ? `Login Details:\nUsername: ${user.username}\nPassword: ${user.password}\n\nLink:\nClient Link: https://7horse.online`
+                                    : `Login Details:\nUsername: ${user.username}\nPassword: ${user.password}\n\nLinks:\nAdmin Link: https://admin.7horse.online\nClient Link: https://7horse.online`
                                 )}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -1870,9 +1870,9 @@ const ListClients = () => {
                           </td> */}
 
                             {/* <td>{user.exposerLimit ? user.exposerLimit : 0}</td> */}
-                            <td className="text-center">{user.mcom}%</td>
+                            {userState.user.comm && <><td className="text-center">{user.mcom}%</td>
                             <td className="text-center">{user.scom}%</td>
-                            <td className="text-center">{user.matcom}%</td>
+                            <td className="text-center">{user.matcom}%</td></>}
 
                             {/* <td>{RoleName[user.role!]}</td> */}
                           </tr>

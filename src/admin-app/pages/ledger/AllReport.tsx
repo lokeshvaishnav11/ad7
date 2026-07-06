@@ -134,7 +134,7 @@ const AllReport = () => {
   //       };
 
   //     });
-      // console.log(finalLedger,"heloo world final ledger is here")
+  // console.log(finalLedger,"heloo world final ledger is here")
 
   //     setLedgerTotal(finalTotals);
 
@@ -153,12 +153,12 @@ const AllReport = () => {
 
       const filteredData = isFilterApplied
         ? rawData?.filter((item: any) => {
-            const createdAt = new Date(item.createdAt);
-            const from = startDate ? new Date(startDate) : null;
-            const to = endDate ? new Date(endDate) : null;
+          const createdAt = new Date(item.createdAt);
+          const from = startDate ? new Date(startDate) : null;
+          const to = endDate ? new Date(endDate) : null;
 
-            return (!from || createdAt >= from) && (!to || createdAt <= to);
-          })
+          return (!from || createdAt >= from) && (!to || createdAt <= to);
+        })
         : rawData;
 
       const grouped: Record<string, GroupedLedger & { updownTotal: number }> =
@@ -209,7 +209,7 @@ const AllReport = () => {
         mCom: 0,
         sCom: 0,
         tCom: 0,
-        mtCom:0,
+        mtCom: 0,
         gTotal: 0,
         upDownShare: 0,
         balance: 0,
@@ -238,7 +238,7 @@ const AllReport = () => {
           finalTotals.sCom += fancyc;
           finalTotals.mtCom += mtCom;
           finalTotals.tCom += ctotal;
-          
+
           finalTotals.gTotal += total;
           finalTotals.upDownShare += (values.ss / 100) * total;
           finalTotals.balance += total - (values.ss / 100) * total;
@@ -261,7 +261,7 @@ const AllReport = () => {
           };
         }
       );
-      console.log(finalLedger,finalTotals, "heloo world final ledger is here");
+      console.log(finalLedger, finalTotals, "heloo world final ledger is here");
 
       setLedgerTotal(finalTotals);
 
@@ -304,13 +304,13 @@ const AllReport = () => {
     if (startDate && endDate) {
       handleDateFilter(true);
     }
-  
+
     // agar dono blank ho jaye to full data dikhao
     if (!startDate && !endDate) {
       handleDateFilter(false);
     }
   }, [startDate, endDate]);
-  
+
 
   return (
     <div style={{ zoom: 0.4 }}>
@@ -436,38 +436,45 @@ const AllReport = () => {
                   >
                     Total
                   </th>
-                  <th
-                    className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
-                    rowSpan={1}
-                    colSpan={1}
-                    style={{ width: "36px" }}
-                  >
-                    M.Com
-                  </th>
-                  <th
-                    className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
-                    rowSpan={1}
-                    colSpan={1}
-                    style={{ width: "34px" }}
-                  >
-                    S.Com
-                  </th>
-                  <th
-                    className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
-                    rowSpan={1}
-                    colSpan={1}
-                    style={{ width: "34px" }}
-                  >
-                    MT.Com
-                  </th>
-                  <th
-                    className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
-                    rowSpan={1}
-                    colSpan={1}
-                    style={{ width: "33px" }}
-                  >
-                    T.Com
-                  </th>
+                  {userState?.user?.comm === true && (
+                    <>
+                      <th
+                        className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
+                        rowSpan={1}
+                        colSpan={1}
+                        style={{ width: "36px" }}
+                      >
+                        M.Com
+                      </th>
+
+                      <th
+                        className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
+                        rowSpan={1}
+                        colSpan={1}
+                        style={{ width: "34px" }}
+                      >
+                        S.Com
+                      </th>
+
+                      <th
+                        className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
+                        rowSpan={1}
+                        colSpan={1}
+                        style={{ width: "34px" }}
+                      >
+                        MT.Com
+                      </th>
+
+                      <th
+                        className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
+                        rowSpan={1}
+                        colSpan={1}
+                        style={{ width: "33px" }}
+                      >
+                        T.Com
+                      </th>
+                    </>
+                  )}
                   <th
                     className="navbar-bet99 text-dark pt-2 pb-2 small sorting_disabled"
                     rowSpan={1}
@@ -554,26 +561,33 @@ const AllReport = () => {
                         </span>
                       </td>
 
-                      <td className="ng-scope">
-                        <span className="text-danger">
-                          {row.mCom.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="ng-scope">
-                        <span className="text-danger">
-                          {row.sCom.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="ng-scope">
-                        <span className="text-danger">
-                          {row.mtCom.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="ng-scope">
-                        <span className="text-danger">
-                          {row.tCom.toFixed(2)}
-                        </span>
-                      </td>
+                      {userState?.user?.comm && (
+                        <>
+                          <td className="ng-scope">
+                            <span className="text-danger">
+                              {row.mCom.toFixed(2)}
+                            </span>
+                          </td>
+
+                          <td className="ng-scope">
+                            <span className="text-danger">
+                              {row.sCom.toFixed(2)}
+                            </span>
+                          </td>
+
+                          <td className="ng-scope">
+                            <span className="text-danger">
+                              {row.mtCom.toFixed(2)}
+                            </span>
+                          </td>
+
+                          <td className="ng-scope">
+                            <span className="text-danger">
+                              {row.tCom.toFixed(2)}
+                            </span>
+                          </td>
+                        </>
+                      )}
 
                       <td className="ng-scope">
                         <span
@@ -769,174 +783,186 @@ const AllReport = () => {
         </table>
       </div> */}
 
-       <div
-                className="card-body bg-light p-0"
-                style={{
-                  position: "fixed",
-                  zIndex: "50",
-                  bottom: "0px",
-                  left: "0px",
-                  width: "100%",
-                  overflow: "auto",
-                }}
-              >
-                <table
-                  className="table table-striped table-bordered p-0 m-0"
-                  style={{ width: "100%" }}
+      <div
+        className="card-body bg-light p-0"
+        style={{
+          position: "fixed",
+          zIndex: "50",
+          bottom: "0px",
+          left: "0px",
+          width: "100%",
+          overflow: "auto",
+        }}
+      >
+        <table
+          className="table table-striped table-bordered p-0 m-0"
+          style={{ width: "100%" }}
+        >
+          <thead className="small">
+            <tr>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                -
+              </th>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                Match (+/-)
+              </th>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                Session (+/-)
+              </th>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                Total
+              </th>
+              {userState?.user?.comm && (
+                <>
+                  <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                    M.Com
+                  </th>
+
+                  <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                    S.Com
+                  </th>
+
+                  <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                    Mt.Com
+                  </th>
+
+                  <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                    T.Com
+                  </th>
+                </>
+              )}
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                G. Total
+              </th>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                UP/Down
+              </th>
+              <th className="navbar-bet99 text-dark pt-1 pb-1 small">
+                Final
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="pt-1 pb-1">
+                <strong>TOTAL</strong>
+              </td>
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    ledgerTotal?.match?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                  }
+                // className="ng-binding text-success"
                 >
-                  <thead className="small">
-                    <tr>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        -
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        Match (+/-)
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        Session (+/-)
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        Total
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        M.Com
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        S.Com
-                      </th>
-                       <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        Mt.Com
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        T.Com
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        G. Total
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        UP/Down
-                      </th>
-                      <th className="navbar-bet99 text-dark pt-1 pb-1 small">
-                        Final
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="pt-1 pb-1">
-                        <strong>TOTAL</strong>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            ledgerTotal?.match?.toFixed(2) > 0 ? "text-success" : "text-danger"
-                          }
-                        // className="ng-binding text-success"
-                        >
-                          {ledgerTotal?.match?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            ledgerTotal?.session?.toFixed(2) > 0 ? "text-success" : "text-danger"
-                          }
-                        // className="ng-binding text-success"
-                        >
-                          {ledgerTotal?.session?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            (ledgerTotal?.match + ledgerTotal?.session).toFixed(
-                              2
-                            ) > 0 ? "text-success" : "text-danger"
-                          }
-                        // className="ng-binding text-success"
-                        >
-                          {(ledgerTotal?.match + ledgerTotal?.session).toFixed(
-                            2
-                          )}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          ng-class="totalPandL.match_comm > 0 ? 'text-danger' : 'text-danger'"
-                          className="ng-binding text-danger"
-                        >
-                          {ledgerTotal?.mCom?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          ng-class="totalPandL.sess_comm > 0 ? 'text-danger' : 'text-danger'"
-                          className="ng-binding text-danger"
-                        >
-                          {ledgerTotal?.sCom?.toFixed(2)}
-                        </span>
+                  {ledgerTotal?.match?.toFixed(2)}
+                </span>
+              </td>
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    ledgerTotal?.session?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                  }
+                // className="ng-binding text-success"
+                >
+                  {ledgerTotal?.session?.toFixed(2)}
+                </span>
+              </td>
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    (ledgerTotal?.match + ledgerTotal?.session).toFixed(
+                      2
+                    ) > 0 ? "text-success" : "text-danger"
+                  }
+                // className="ng-binding text-success"
+                >
+                  {(ledgerTotal?.match + ledgerTotal?.session).toFixed(
+                    2
+                  )}
+                </span>
+              </td>
+              {userState?.user?.comm && (
+                <>
+                  <td className="pt-1 pb-1">
+                    <span
+                      ng-class="totalPandL.match_comm > 0 ? 'text-danger' : 'text-danger'"
+                      className="ng-binding text-danger"
+                    >
+                      {(ledgerTotal?.mCom ?? 0).toFixed(2)}
+                    </span>
+                  </td>
 
-                      </td>
+                  <td className="pt-1 pb-1">
+                    <span
+                      ng-class="totalPandL.sess_comm > 0 ? 'text-danger' : 'text-danger'"
+                      className="ng-binding text-danger"
+                    >
+                      {(ledgerTotal?.sCom ?? 0).toFixed(2)}
+                    </span>
+                  </td>
 
-                       <td className="pt-1 pb-1">
-                        <span
-                          ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
-                          className="ng-binding text-danger"
-                        >
-                          {ledgerTotal?.mtCom?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
-                          className="ng-binding text-danger"
-                        >
-                          {ledgerTotal?.tCom?.toFixed(2)}
-                        </span>
-                      </td>
-                       
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            ledgerTotal?.gTotal?.toFixed(2) > 0 ? "text-success" : "text-danger"
-                          }
-                        // className="ng-binding text-success"
-                        >
-                          {ledgerTotal?.gTotal?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            ledgerTotal?.upDownShare?.toFixed(2) > 0 ? "text-success" : "text-danger"
-                          }
-                        // className="ng-binding text-success"
-                        >
-                          {ledgerTotal?.upDownShare?.toFixed(2)}
-                        </span>
-                      </td>
-                      <td className="pt-1 pb-1">
-                        <span
-                          className={
-                            (
-                              Number(ledgerTotal?.balance || 0) 
-                            ) > 0
-                              ? "text-success"
-                              : "text-danger"
-                          }
+                  <td className="pt-1 pb-1">
+                    <span
+                      ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
+                      className="ng-binding text-danger"
+                    >
+                      {(ledgerTotal?.mtCom ?? 0).toFixed(2)}
+                    </span>
+                  </td>
 
-                        // className="ng-binding text-success"
-                        >
-                          {(
-                            ledgerTotal?.balance?.toFixed(2)
-                            
-                          )}
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                  <td className="pt-1 pb-1">
+                    <span
+                      ng-class="totalPandL.total_comm > 0 ? 'text-danger' : 'text-danger'"
+                      className="ng-binding text-danger"
+                    >
+                      {(ledgerTotal?.tCom ?? 0).toFixed(2)}
+                    </span>
+                  </td>
+                </>
+              )}
+
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    ledgerTotal?.gTotal?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                  }
+                // className="ng-binding text-success"
+                >
+                  {ledgerTotal?.gTotal?.toFixed(2)}
+                </span>
+              </td>
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    ledgerTotal?.upDownShare?.toFixed(2) > 0 ? "text-success" : "text-danger"
+                  }
+                // className="ng-binding text-success"
+                >
+                  {ledgerTotal?.upDownShare?.toFixed(2)}
+                </span>
+              </td>
+              <td className="pt-1 pb-1">
+                <span
+                  className={
+                    (
+                      Number(ledgerTotal?.balance || 0)
+                    ) > 0
+                      ? "text-success"
+                      : "text-danger"
+                  }
+
+                // className="ng-binding text-success"
+                >
+                  {(
+                    ledgerTotal?.balance?.toFixed(2)
+
+                  )}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
