@@ -919,7 +919,7 @@ const ListClients = () => {
                     </div> */}
                   </div>
                   <div className="float-right   col-md-4 grid gap-2 ">
-                    <p className="text-right d-flex items-center justify-between bg-black p-2 rounded ">
+                    <p className="text-right d-flex items-center justify-between p-2 rounded table-row">
                       <p className="text-xl text-white">
                         {newtype == "sadmin"
                           ? "Sub Admin"
@@ -1338,8 +1338,8 @@ const ListClients = () => {
                                   <CloseButton className="text-white" />
                                 </button>
                                 <div
-                                  className="actions-container  p-4"
-                                  style={{ backgroundColor: "#F4EED0" }}
+                                  className="actions-container  p-4 bg-color"
+                                  
                                 >
                                   <a
                                     className="hover:text-white  border-b pb-2"

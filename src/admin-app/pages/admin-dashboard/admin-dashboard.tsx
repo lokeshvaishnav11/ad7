@@ -359,6 +359,8 @@ const AdminDashboard = () => {
                   flexWrap: "wrap",
                   marginLeft: "-10px",
                   marginRight: "-10px",
+                                      textAlign:"center",
+
                 }}
               >
                 {/* <div
@@ -394,7 +396,7 @@ const AdminDashboard = () => {
                {userState?.user?.comm && <div
                   style={{
                     width: "50%",
-                    // padding: "0 10px",
+                    padding: "0 10px",
                     marginBottom: "10px",
                     boxSizing: "border-box",
                   }}

@@ -1,6 +1,6 @@
 
 .card-header{
-	background: black;
+	/* background: black; */
 	color: #fff !important;
     font-weight: 700;
 } 
@@ -60,7 +60,7 @@ table ul .dropdown-toggle::after {
 }
 
 .navbar-bet99 {
-    background: rgb(0, 0, 0) !important;
+    background: var(--theme2-bg70);
     color: #fff !important
 }
 

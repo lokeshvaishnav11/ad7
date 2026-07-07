@@ -541,7 +541,7 @@ const ClientBetsUser = () => {
             )}
             {showmatch ? (
               <div
-                style={{ height: "100vh", backgroundColor: "#F4EED0" }}
+                style={{ height: "100vh" }}
                 className="card-body p-0 overflow-x-scroll overflow-y-scroll"
               >
                 <table className="table table-striped table-bordered table-hover">
