@@ -1710,7 +1710,7 @@ const ListClients = () => {
                                 }}
                               >
                                 <img
-                                  src="https://admin.7wickets.co/assets/images/whatsapp.png"
+                                  src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
                                   alt="WhatsApp"
                                   style={{
                                     width: "20px",

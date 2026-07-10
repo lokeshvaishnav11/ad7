@@ -1888,6 +1888,7 @@ ul.mtree.transit li.mtree-open>a::after {
     margin-bottom: 0;
         padding-top: 8px;
     padding-bottom: 8px;
+        border-radius: 10px;
 }
 
 .main-content {
@@ -6346,9 +6347,15 @@ img.rrotate {
 }
 
 .table-row>div .odd {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: bold;
   margin-bottom: 1px;
+}
+
+.icon-font-mange{
+      height: 44px !important;
+    width: 34px !important;
+
 }
 
 .fancy-market .suspended:after {

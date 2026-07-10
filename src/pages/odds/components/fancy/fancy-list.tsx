@@ -183,7 +183,7 @@ export const FancyList = React.memo(
                       <span className="odd d-block">
                         {updatedFancy.LayPrice1
                           ? updatedFancy.LayPrice1
-                          : "SUSPEND"}
+                          : "0"}
                       </span>{" "}
                       <span>{updatedFancy.LaySize1}</span>
                     </div>
@@ -196,7 +196,7 @@ export const FancyList = React.memo(
                       <span className="odd d-block">
                         {updatedFancy.BackPrice1
                           ? updatedFancy.BackPrice1
-                          : "SUSPEND"}
+                          : "0"}
                       </span>{" "}
                       <span>{updatedFancy.BackSize1}</span>
                     </div>
