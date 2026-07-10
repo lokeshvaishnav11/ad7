@@ -386,7 +386,7 @@ const AdminDashboard = () => {
                     boxSizing: "border-box",
                   }}
                 >
-                  <div className="card">
+                  <div className="">
                     <div className=" card-header-custom h6 ng-binding">
                       My Share ({shared}%)
                     </div>
@@ -401,7 +401,7 @@ const AdminDashboard = () => {
                     boxSizing: "border-box",
                   }}
                 >
-                  <div className="card">
+                  <div className="">
                     <div className="card-header-custom h6 ng-binding">
                       Comm ({detail?.mcom ?? 0}% / {detail?.scom ?? 0}% /{detail?.matcom ?? 0}%)
                     </div>
@@ -420,7 +420,7 @@ const AdminDashboard = () => {
                   >
                     <CustomLink
                       to={`/list-clients/${userState?.user?.username}/${role.key}`}
-                      className="card"
+                      className=""
                       style={{
                         display: "block",
                         textDecoration: "none",
