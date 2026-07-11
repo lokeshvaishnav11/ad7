@@ -477,6 +477,8 @@ const AdminDashboard = () => {
                                 flexDirection: "column",
                                 alignItems: "center",
                                 textDecoration: "none",
+                                borderRadius: "10px",
+                                background:"rgb(18, 58, 124)"
                               }}
                             >
                               <img
@@ -484,8 +486,7 @@ const AdminDashboard = () => {
                                 alt={Item.title}
                                 style={{
                                   width: "100%",
-                                  maxWidth: "120px",
-                                  borderRadius: "10px",
+                                  objectFit: "cover",
                                   display: "block",
                                 }}
                               />
@@ -499,7 +500,7 @@ const AdminDashboard = () => {
                                   fontWeight: "600",
                                   display: "block",
                                   width: "100%",
-                                  background: "black"
+                                  // background: "black"
 
                                 }}
                               >
@@ -525,6 +526,8 @@ const AdminDashboard = () => {
                           flexDirection: "column",
                           alignItems: "center",
                           textDecoration: "none",
+                             borderRadius: "10px",
+                                background:"rgb(18, 58, 124)"
                         }}
                       >
                         <img
@@ -532,8 +535,8 @@ const AdminDashboard = () => {
                           alt="Matka"
                           style={{
                             width: "100%",
-                            maxWidth: "120px",
-                            borderRadius: "10px",
+                            // maxWidth: "120px",
+                           background:"white",
                             display: "block",
                           }}
                         />
@@ -547,7 +550,7 @@ const AdminDashboard = () => {
                             fontWeight: "600",
                             display: "block",
                             width: "100%",
-                            background: "black"
+                            // background: "black"
                           }}
                         >
                           Matka
