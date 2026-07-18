@@ -1584,10 +1584,19 @@ const AddUser = () => {
         fword = "";
     }
 
-    const randomNumber =
-      Math.floor(Math.random() * (99999 - 19999 + 1)) + 19999;
-    setSendcode(fword + randomNumber);
+    // const randomNumber =
+    //   Math.floor(Math.random() * (99999 - 19999 + 1)) + 19999;
+    // setSendcode(fword + randomNumber);
+    
+    userService.getUseridno().then((res: AxiosResponse<any>)=>{
+      const randomNumber = res.data.data.id
+      setSendcode(fword + randomNumber)
+    })
+
+
   }, [thetype]);
+
+
 
   const {
     register,

@@ -39,6 +39,10 @@ class UserService {
     return api.get(`/get-user-detail/?username=${username}`)
   }
 
+   getUseridno() {
+    return api.get(`/get-user-id-no`)
+  }
+
   getParentUserDetail(username: string) {
     return api.get(`/get-parent-user-detail/?username=${username}`)
   }
